@@ -48,6 +48,9 @@ TagManager:
   - name: Interactive
     uniqueID: 1410920987
     locked: 0
+  - name: Walls
+    uniqueID: 1233519153
+    locked: 0
   - name: Units
     uniqueID: 2603629015
     locked: 0

@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public Transform movePoint;
-    public LayerMask whatStopsMovement;
+    public LayerMask stopLayer;
     public Animator animator;
 
     // Start is called before the first frame update
@@ -19,35 +19,20 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
-    
-        Vector3 horizontal = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
-        Vector3 vertical = new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f);
-        
-        
 
-        //If the distance between the player and the movepoint is less than 0.5 units...
-        if(Vector3.Distance(transform.position, movePoint.position) <= 0.05f)
+        float x_val = Input.GetAxisRaw("Horizontal");
+        float y_val = Input.GetAxisRaw("Vertical");
+
+        //If the distance between the player and the movepoint is less than 0.05 units...
+        if (Vector3.Distance(transform.position, movePoint.position) <= 0.05f)
         {
-            if(Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
+            if (Mathf.Abs(x_val) == 1f)
             {
-                if(!Physics2D.OverlapCircle(movePoint.position + horizontal, .2f, whatStopsMovement))
-                {   
-                    animator.SetFloat("Horizontal", Input.GetAxisRaw("Horizontal"));
-                    animator.SetFloat("Vertical", 0f);
-                    movePoint.position += horizontal;
-                    return;
-                }
+                MoveHorizontal(x_val);
             }
-            else if(Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)
+            else if (Mathf.Abs(y_val) == 1f)
             {
-                if(!Physics2D.OverlapCircle(movePoint.position + vertical, .2f, whatStopsMovement))
-                {
-                    animator.SetFloat("Vertical", Input.GetAxisRaw("Vertical"));
-                    animator.SetFloat("Horizontal", 0f);
-                    movePoint.position += vertical;
-                    return;
-                }
-                
+                MoveVertical(y_val);
             }
             else
             {
@@ -57,4 +42,42 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    void MoveHorizontal(float x_val)
+    {
+        Vector3 horizontal = new Vector3(x_val, 0f, 0f);
+
+        if (!Physics2D.OverlapCircle(movePoint.position + horizontal, .2f, stopLayer))
+        {
+            animator.SetFloat("Horizontal", x_val);
+            animator.SetFloat("Vertical", 0f);
+            movePoint.position += horizontal;
+            return;
+        }
+        else
+        {
+            animator.SetFloat("Horizontal", x_val);
+            animator.SetFloat("Vertical", 0f);
+            return;
+        }
+    }
+
+    void MoveVertical(float y_val)
+    {
+        Vector3 vertical = new Vector3(0f, y_val, 0f);
+
+        if (!Physics2D.OverlapCircle(movePoint.position + vertical, .2f, stopLayer))
+        {
+            animator.SetFloat("Vertical", y_val);
+            animator.SetFloat("Horizontal", 0f);
+            movePoint.position += vertical;
+            return;
+        }
+        else
+        {
+            animator.SetFloat("Vertical", y_val);
+            animator.SetFloat("Horizontal", 0f);
+            return;
+        }
+    }
+    
 }
