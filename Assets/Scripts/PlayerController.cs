@@ -18,6 +18,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        //TODO Implement a check where if a new KeyPressDown happens, the player direction should turn.
+        // BUT ONLY if (Vector3.Distance(transform.position, movePoint.position) <= 0.05f),
+        // AKA the player has finished moving.
+
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
 
         float x_val = Input.GetAxisRaw("Horizontal");
@@ -42,6 +47,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
     void MoveHorizontal(float x_val)
     {
         Vector3 horizontal = new Vector3(x_val, 0f, 0f);
