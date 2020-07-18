@@ -140,6 +140,10 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 1413807272}
+    - target: {fileID: 178859261, guid: 4aa0f594962042945afb30a68d69c2a8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4518269238913542740, guid: 4aa0f594962042945afb30a68d69c2a8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1367,6 +1371,49 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 178859258}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1413807275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413807268}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dd88ed74185ba945926aad458b828e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  movePoint: {fileID: 1734615791}
+  stopLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  animator: {fileID: 1413807272}
+  lastDirection: 
+  currentDirection: 
+--- !u!114 &1413807276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413807268}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f43bd014174ff145a48c22560fb5598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 5
+  tilemap: {fileID: 668129618}
+  moveDelay: 0.1
+  northSprite: {fileID: 6554912501341384154, guid: f2c324f78418ae84191fc689512db6e7,
+    type: 3}
+  eastSprite: {fileID: 5458265238480757771, guid: f2c324f78418ae84191fc689512db6e7,
+    type: 3}
+  southSprite: {fileID: 8369525460337575081, guid: f2c324f78418ae84191fc689512db6e7,
+    type: 3}
+  westSprite: {fileID: 7677645372403412875, guid: f2c324f78418ae84191fc689512db6e7,
+    type: 3}
 --- !u!4 &1734615791 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1369101682, guid: 4aa0f594962042945afb30a68d69c2a8,

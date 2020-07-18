@@ -52,5 +52,24 @@
         "ProjectSettings/":true,
         "temp/":true,
         "Temp/":true
-    }
+    },
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#1955a4",
+        "activityBar.activeBorder": "#e65996",
+        "activityBar.background": "#1955a4",
+        "activityBar.foreground": "#e7e7e7",
+        "activityBar.inactiveForeground": "#e7e7e799",
+        "activityBarBadge.background": "#e65996",
+        "activityBarBadge.foreground": "#15202b",
+        "statusBar.background": "#123e78",
+        "statusBar.border": "#123e78",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#1955a4",
+        "titleBar.activeBackground": "#123e78",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.border": "#123e78",
+        "titleBar.inactiveBackground": "#123e7899",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "peacock.color": "#123e78"
 }
