@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RoomMove : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class RoomMove : MonoBehaviour
     private CameraMovement cam;
     private GameObject player;
     private PlayerController playerController;
+    public bool needText; //Boolean to determine if title card is needed
+    public string placeName;
+    public GameObject text;
+    public Text placeText;
     
     // Start is called before the first frame update
     void Start()
@@ -35,9 +40,21 @@ public class RoomMove : MonoBehaviour
             // float x_val = otherObj.transform.position.x;
             // float y_val = otherObj.transform.position.y;
             otherObj.transform.position = SnapPosition(otherObj.transform.position, 0.5f);
-
             playerController.movePoint.position = otherObj.transform.position;
+
+            if(needText)
+            {
+                StartCoroutine(placeNameCo());
+            }
         }
+    }
+
+    private IEnumerator placeNameCo() //place name coroutine
+    {
+        text.SetActive(true);
+        placeText.text = placeName;
+        yield return new WaitForSeconds(4f);
+        text.SetActive(false);
     }
 
     private Vector3 SnapPosition(Vector3 input, float factor = 1f)
