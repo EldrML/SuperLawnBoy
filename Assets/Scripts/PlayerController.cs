@@ -22,18 +22,21 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Move the player.
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
 
+        //Get a new input for the next movement.
         input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     
         //If the distance between the player and the movepoint is less than 0.05 units...
         if (Vector3.Distance(transform.position, movePoint.position) <= 0.05f)
         {
-            if (Mathf.Abs(input.x) == 1f)
+            
+            if (Mathf.Abs(input.x) == 1f) //If the movement direction is horizontal...
             {
                 MoveHorizontal(input.x);
             }
-            else if (Mathf.Abs(input.y) == 1f)
+            else if (Mathf.Abs(input.y) == 1f)  //If the movement direction is vertical...
             {
                 MoveVertical(input.y);
             }
@@ -79,6 +82,11 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("Vertical", y_val);
             animator.SetFloat("Horizontal", 0f);
         }
+    }
+
+    void CheckMovepointCollision()
+    {
+
     }
 
 }

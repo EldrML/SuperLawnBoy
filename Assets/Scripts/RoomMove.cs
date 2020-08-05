@@ -9,8 +9,8 @@ public class RoomMove : MonoBehaviour
     public Vector2 cameraMaxChange;
     public Vector3 playerChange;
     private CameraMovement cam;
-    private GameObject player;
-    private PlayerController playerController;
+    //public GameObject player;
+    public PlayerController playerController;
     public bool needText; //Boolean to determine if title card is needed
     public string placeName;
     public GameObject text;
@@ -20,8 +20,8 @@ public class RoomMove : MonoBehaviour
     void Start()
     {
         cam = Camera.main.GetComponent<CameraMovement>();
-        player = GameObject.Find("LawnBoy");
-        playerController = player.GetComponent<PlayerController>();
+        //player = GameObject.Find("LawnBoy");
+        //playerController = player.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
