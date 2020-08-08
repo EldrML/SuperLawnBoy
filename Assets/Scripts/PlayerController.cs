@@ -6,28 +6,24 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public Transform movePoint;
-    public LayerMask stopLayer;
+    // public LayerMask stopLayer;
     public Animator animator;
-    //public bool isMoving;
     public Vector2 input;
-    public Vector2 direction;
-    public GameObject[] colliderList;
+    // public GameObject[] colliderList;
 
     bool canMove;
 
-
     void Start()
     {
-        direction = Vector2.zero;     //Initialize with no direction.
         movePoint.parent = null;
     }
 
     void Update()
     {
-        Move();
+        GetMove();
     }
 
-    void Move()
+    void GetMove()  //Get's the movement input from the player.
     {
         //Move the player.
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
@@ -40,63 +36,47 @@ public class PlayerController : MonoBehaviour
         {
             if (Mathf.Abs(input.x) == 1f)           //Horizontal Movement
             {
-                direction = new Vector2(input.x, 0);
-                MoveHorizontal(input.x, CanMove());
+                input.y = 0f;
+                MoveExecute(input);
             }
             else if (Mathf.Abs(input.y) == 1f)      //Vertical Movement
             {
-                direction = new Vector2(0, input.y);
-                MoveVertical(input.y, CanMove());
+                input.x = 0f;
+                MoveExecute(input);
             }
-            else
+            else                                    //No Movement
             {
-                animator.SetFloat("Vertical", 0f);
-                animator.SetFloat("Horizontal", 0f);
+                AnimatorControl(input);
             }
         }
     }
-    
-    void MoveHorizontal(float xVal, bool canMove) // Horizontal movement manager.
-    {
-        Vector3 horizontal = new Vector3(xVal, 0f, 0f);
 
-        //If no collision, move the player.
-        if (canMove)
+    void MoveExecute(Vector2 input) //Executes the Movement input.
+    {
+        Vector3 moveVector = new Vector3(input.x, input.y, 0f);
+
+        if (CanMove())  //If no collision, move the player.
         {
-            animator.SetFloat("Horizontal", xVal);
-            animator.SetFloat("Vertical", 0f);
-            movePoint.position += horizontal;
+            AnimatorControl(input);
+            movePoint.position += moveVector;
         }
         else //If the player can't move, just set the animation to walk in that direction, like Pokemon.
         {
-            animator.SetFloat("Horizontal", xVal);
-            animator.SetFloat("Vertical", 0f);
+            AnimatorControl(input);
         }
     }
 
-    void MoveVertical(float yVal, bool canMove) // Vertical movement manager.
+    void AnimatorControl(Vector2 input)
     {
-        Vector3 vertical = new Vector3(0f, yVal, 0f);
-
-        //If no collision, move the player.
-        if (canMove)
-        {
-            animator.SetFloat("Vertical", yVal);
-            animator.SetFloat("Horizontal", 0f);
-            movePoint.position += vertical;
-        }
-        else //If the player can't move, just set the animation to walk in that direction, like Pokemon.
-        {
-            animator.SetFloat("Vertical", yVal);
-            animator.SetFloat("Horizontal", 0f);
-        }
+        animator.SetFloat("Horizontal", input.x);
+        animator.SetFloat("Vertical", input.y);
     }
 
     bool CanMove() // Checks if there is a collision object in the direction of desired movement.
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(direction), 1f);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(input), 1f);
 
-        Debug.DrawRay(transform.position, 1f * transform.TransformDirection(direction), Color.red, 0.25f);
+        //Debug.DrawRay(transform.position, 1f * transform.TransformDirection(input), Color.red, 0.25f);
         if (hit)
         {
             if (hit.collider.tag == "Wall")
