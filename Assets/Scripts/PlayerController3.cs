@@ -1,8 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController3 : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public Transform movePoint;
@@ -17,11 +17,16 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        movePoint.parent = null;
+        // movePoint.parent = null; //UNNEEDED?
     }
 
     // Update is called once per frame
     void Update()
+    {
+        Move();
+    }
+
+    void Move()
     {
         //Move the player.
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);

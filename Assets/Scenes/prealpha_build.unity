@@ -247,7 +247,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!156049354 &438732719
 Grid:
   m_ObjectHideFlags: 0
@@ -328,33 +328,7 @@ CompositeCollider2D:
   m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 498714101}
-    m_ColliderPaths:
-    - - X: 170000000
-        Y: 60000000
-      - X: 170000000
-        Y: 160000000
-      - X: -90000000
-        Y: 160000000
-      - X: -90000000
-        Y: -40000000
-      - X: 170000000
-        Y: -40000000
-      - X: 170000000
-        Y: 30000000
-      - X: 160000000
-        Y: 30000000
-      - X: 160000000
-        Y: -30000000
-      - X: -80000000
-        Y: -30000000
-      - X: -80000000
-        Y: 150000000
-      - X: 160000000
-        Y: 150000000
-      - X: 160000000
-        Y: 60000000
+  m_ColliderPaths: []
   m_CompositePaths:
     m_Paths:
     - - {x: 16.999971, y: -4}
@@ -8046,6 +8020,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoomTransfer (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5737606279026625278, guid: c9a6c5fba3eb9094f9668698b71cbbab,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5737606279026625279, guid: c9a6c5fba3eb9094f9668698b71cbbab,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8318,7 +8297,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1416609000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8385,7 +8364,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1563138172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14254,6 +14233,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoomTransfer
       objectReference: {fileID: 0}
+    - target: {fileID: 5737606279026625278, guid: c9a6c5fba3eb9094f9668698b71cbbab,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5737606279026625279, guid: c9a6c5fba3eb9094f9668698b71cbbab,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14396,6 +14380,11 @@ PrefabInstance:
     - target: {fileID: 7448866607926411604, guid: abccd90b74275b443bdf883229e218dd,
         type: 3}
       propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7448866607926411604, guid: abccd90b74275b443bdf883229e218dd,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7936926137705282179, guid: abccd90b74275b443bdf883229e218dd,

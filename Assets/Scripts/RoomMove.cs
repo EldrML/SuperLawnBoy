@@ -20,8 +20,6 @@ public class RoomMove : MonoBehaviour
     void Start()
     {
         cam = Camera.main.GetComponent<CameraMovement>();
-        //player = GameObject.Find("LawnBoy");
-        //playerController = player.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -37,8 +35,6 @@ public class RoomMove : MonoBehaviour
             cam.minPosition += cameraMinChange;
             cam.maxPosition += cameraMaxChange;
             otherObj.transform.position += playerChange;
-            // float x_val = otherObj.transform.position.x;
-            // float y_val = otherObj.transform.position.y;
             otherObj.transform.position = SnapPosition(otherObj.transform.position, 0.5f);
             playerController.movePoint.position = otherObj.transform.position;
 
