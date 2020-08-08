@@ -10,83 +10,106 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     //public bool isMoving;
     public Vector2 input;
+    public Vector2 direction;
     public GameObject[] colliderList;
 
+    bool canMove;
 
 
-    // Start is called before the first frame update
     void Start()
     {
+        direction = Vector2.zero;     //Initialize with no direction.
         movePoint.parent = null;
     }
 
-    // Update is called once per frame
     void Update()
+    {
+        Move();
+    }
+
+    void Move()
     {
         //Move the player.
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
 
         //Get a new input for the next movement.
         input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-    
+
         //If the distance between the player and the movepoint is less than 0.05 units...
         if (Vector3.Distance(transform.position, movePoint.position) <= 0.05f)
         {
-            
-            if (Mathf.Abs(input.x) == 1f) //If the movement direction is horizontal...
+            if (Mathf.Abs(input.x) == 1f)           //Horizontal Movement
             {
-                MoveHorizontal(input.x);
+                direction = new Vector2(input.x, 0);
+                MoveHorizontal(input.x, CanMove());
             }
-            else if (Mathf.Abs(input.y) == 1f)  //If the movement direction is vertical...
+            else if (Mathf.Abs(input.y) == 1f)      //Vertical Movement
             {
-                MoveVertical(input.y);
+                direction = new Vector2(0, input.y);
+                MoveVertical(input.y, CanMove());
             }
             else
             {
                 animator.SetFloat("Vertical", 0f);
                 animator.SetFloat("Horizontal", 0f);
             }
-
-
         }
     }
-
-    void MoveHorizontal(float x_val)
+    
+    void MoveHorizontal(float xVal, bool canMove) // Horizontal movement manager.
     {
-        Vector3 horizontal = new Vector3(x_val, 0f, 0f);
+        Vector3 horizontal = new Vector3(xVal, 0f, 0f);
 
-        if (!Physics2D.OverlapCircle(movePoint.position + horizontal, .2f, stopLayer)) //If no collision, move the player.
+        //If no collision, move the player.
+        if (canMove)
         {
-            animator.SetFloat("Horizontal", x_val);
+            animator.SetFloat("Horizontal", xVal);
             animator.SetFloat("Vertical", 0f);
             movePoint.position += horizontal;
         }
-        else //If the player is colliding with a wall, just set the animation to walk, don't actually move.
+        else //If the player can't move, just set the animation to walk in that direction, like Pokemon.
         {
-            animator.SetFloat("Horizontal", x_val);
+            animator.SetFloat("Horizontal", xVal);
             animator.SetFloat("Vertical", 0f);
         }
     }
 
-    void MoveVertical(float y_val)
+    void MoveVertical(float yVal, bool canMove) // Vertical movement manager.
     {
-        Vector3 vertical = new Vector3(0f, y_val, 0f);
+        Vector3 vertical = new Vector3(0f, yVal, 0f);
 
-        if (!Physics2D.OverlapCircle(movePoint.position + vertical, .2f, stopLayer))
+        //If no collision, move the player.
+        if (canMove)
         {
-            animator.SetFloat("Vertical", y_val);
+            animator.SetFloat("Vertical", yVal);
             animator.SetFloat("Horizontal", 0f);
             movePoint.position += vertical;
         }
-        else
+        else //If the player can't move, just set the animation to walk in that direction, like Pokemon.
         {
-            animator.SetFloat("Vertical", y_val);
+            animator.SetFloat("Vertical", yVal);
             animator.SetFloat("Horizontal", 0f);
         }
     }
 
-    bool CheckMovepointCollision()
+    bool CanMove() // Checks if there is a collision object in the direction of desired movement.
     {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(direction), 1f);
+
+        Debug.DrawRay(transform.position, 1f * transform.TransformDirection(direction), Color.red, 0.25f);
+        if (hit)
+        {
+            if (hit.collider.tag == "Wall")
+            {
+                Debug.Log("Hit Something : " + hit.collider.tag);
+                return false;
+            }
+            if (hit.collider.tag == "Sign")
+            {
+                Debug.Log("Hit Something : " + hit.collider.tag);
+                return false;
+            }
+        }
         return true;
     }
 

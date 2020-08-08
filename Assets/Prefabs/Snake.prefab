@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8243634468822425724}
   - component: {fileID: 8243634468822425712}
   - component: {fileID: 8243634468822425727}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Snake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,6 +49,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -71,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1691338281
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -8688392260014441854, guid: be73344e5e47fd34c974b1cfbb3fdf02,
     type: 3}
