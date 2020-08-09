@@ -9,18 +9,12 @@ public class Sign : MonoBehaviour
     public Text dialogText;
     public string dialog;
     public bool playerInRange;
-    public BoxCollider2D mainSignCollider;
-
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && playerInRange)
+        if (Input.GetKeyDown(KeyCode.Space) && playerInRange)
         {
-            if(dialogBox.activeInHierarchy)
+            if (dialogBox.activeInHierarchy)
             {
                 dialogBox.SetActive(false);
             }
@@ -32,6 +26,7 @@ public class Sign : MonoBehaviour
         }
     }
 
+    #region Trigger Logic
     private void OnTriggerEnter2D(Collider2D otherObj)
     {
         if(otherObj.CompareTag("Player"))
@@ -48,4 +43,6 @@ public class Sign : MonoBehaviour
             dialogBox.SetActive(false);
         }
     }
+    #endregion
+
 }

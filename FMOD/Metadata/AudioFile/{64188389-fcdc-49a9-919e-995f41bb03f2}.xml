@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{64188389-fcdc-49a9-919e-995f41bb03f2}">
+		<property name="assetPath">
+			<value>level_grass_AAAA.ogg</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>105.43478458049887</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{b2d163ba-e4de-43f6-a76f-847af27c08a7}</destination>
+		</relationship>
+	</object>
+</objects>
