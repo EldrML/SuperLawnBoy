@@ -9,11 +9,21 @@ public class PlayerController : MonoBehaviour
     public Transform movePoint;
     // public LayerMask stopLayer;
     public Animator animator;
-        // public GameObject[] colliderList;
+    // public GameObject[] colliderList;
     public GameObject interactiveObject;
+    public enum PlayerState
+    {
+        move, hurt, dash, Action,
+    }
+    public enum PlayerType
+    {
+        nm, wm     // With/Without lawnmower
+    }
+    public PlayerState currentState;
+    public PlayerType currentType;
 
     Vector2 input;
-    Vector2 lookDirection;
+    public Vector2 lookDirection;
     float playerViewRange = 1f;
     #endregion
 
@@ -22,77 +32,95 @@ public class PlayerController : MonoBehaviour
     {
         movePoint.parent = null;
         lookDirection = Vector2.down;
+        currentState = PlayerState.move;
+        currentType = PlayerType.nm;
     }
 
     void Update()
     {
-        GetMove();
+            if (Input.GetButtonDown("Action") && currentState != PlayerState.Action && currentType == PlayerType.wm)
+            {
+                StartCoroutine(ActionCo());
+            }
+            
+            if (Input.GetButtonDown("Action") && currentState == PlayerState.move && currentType == PlayerType.nm)
+            {
+                CheckInFront();
+            }
 
-        // if(Input.GetKeyDown(KeyCode.Space))
-        // {
-        //     CheckInFront();
-        // }
+            if (currentState == PlayerState.move)
+            {
+                GetMove();
+            }
     }
     #endregion
 
-    #region Player Movement and Animation Control
-    void GetMove()  //Get's the movement input from the player.
+    void GetMove()  //Moves the player and sets proper animations
     {
-        //Move the player.
+        //Move player
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
 
-        //Get a new input for the next movement.
+        //Get movement input
         input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         //If the distance between the player and the movepoint is less than 0.05 units...
         if (Vector3.Distance(transform.position, movePoint.position) <= 0.05f)
         {
+            // Limit movement to 4 directions.
             if (Mathf.Abs(input.x) == 1f)           //Horizontal Movement
             {
                 input.y = 0f;
-                lookDirection = input;
-                MoveExecute(input);
             }
             else if (Mathf.Abs(input.y) == 1f)      //Vertical Movement
             {
                 input.x = 0f;
-                lookDirection = input;
-                MoveExecute(input);
             }
-            else                                    //No Movement
+            
+            // // Update look direction if movement occurs
+            // if(input != Vector2.zero)
+            // {
+            //     lookDirection = input;                  //Direction of RayCast for collision checking
+            // }
+            
+            // Move if allowed
+            if (CanMove())                          //If no collision, move the player.
             {
-                AnimatorControl(input);
+                Vector3 moveVector = new Vector3(input.x, input.y, 0f);
+                movePoint.position += moveVector;
+            }
+
+            // -- Animation/Look Direction Control -- //
+            if (input != Vector2.zero)
+            {
+                lookDirection = input;                  //Direction of RayCast for collision checking
+                animator.SetFloat("Horizontal", input.x);
+                animator.SetFloat("Vertical", input.y);
+                animator.SetBool("Moving", true);
+            }
+            else
+            {
+                animator.SetBool("Moving", false);
             }
         }
     }
 
-    void MoveExecute(Vector2 input) //Executes the Movement input.
+    IEnumerator ActionCo()  // Performs an action (CURRENTLY JUST MOWER THUMBS UP)
     {
-        Vector3 moveVector = new Vector3(input.x, input.y, 0f);
-
-        if (CanMove())  //If no collision, move the player.
-        {
-            AnimatorControl(input);
-            movePoint.position += moveVector;
-        }
-        else // If the player can't move
-        {
-            AnimatorControl(input); // Set the animation to walk in that direction, like Pokemon.
-        }
+        animator.SetBool("Action", true);
+        currentState = PlayerState.Action;
+        yield return null;
+        animator.SetBool("Action", false);
+        yield return new WaitForSeconds(1f);
+        currentState = PlayerState.move;
     }
-
-    void AnimatorControl(Vector2 input)
-    {
-        animator.SetFloat("Horizontal", input.x);
-        animator.SetFloat("Vertical", input.y);
-    }
-    #endregion
 
     bool CanMove() // Checks if there is a collision object in the direction of desired movement.
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(input), playerViewRange);
-
+        if (Vector3.Distance(transform.position, movePoint.position) <= 0.05f)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(input), playerViewRange);
         //Debug.DrawRay(transform.position, playerViewRange * transform.TransformDirection(input), Color.red, 0.25f);
+
         if (hit)
         {
             return false;
@@ -105,9 +133,12 @@ public class PlayerController : MonoBehaviour
             */
         }
         return true;
+        }
+        return false;
+        
     }
 
-    void CheckInFront()
+    void CheckInFront() //Similar to CanMove function, but hopefully can be expanded if needed.
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(lookDirection), playerViewRange);
         Debug.DrawRay(transform.position, playerViewRange * transform.TransformDirection(lookDirection), Color.red, 0.25f);
@@ -123,7 +154,36 @@ public class PlayerController : MonoBehaviour
                 interactiveObject = hit.collider.gameObject;
                 //interactiveObject.ReadSign();
             }
+            if (hit.collider.tag == "Mower")
+            {
+                //Debug.Log("That's a " + hit.collider.tag + ".");
+                interactiveObject = hit.collider.gameObject;
+                Destroy(interactiveObject);
+                currentType = PlayerType.wm;
+                animator.SetBool("HasMower", true);
+                //interactiveObject.ReadSign();
+            }
+        }
+        else
+        {
+
         }
     }
 
+    #region Extra Functions
+    void AnimatorControl(Vector2 input) //May be useful later for more animation controlling...
+    {
+        if (input != Vector2.zero)
+        {
+            animator.SetFloat("Horizontal", input.x);
+            animator.SetFloat("Vertical", input.y);
+            animator.SetBool("Moving", true);
+        }
+        else
+        {
+            animator.SetBool("Moving", false);
+        }
+
+    }
+    #endregion
 }

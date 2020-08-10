@@ -1,0 +1,1858 @@
+fileFormatVersion: 2
+guid: 0748c51e0c998da4e9a7ae304f2b7778
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1258330758495801035
+    second: lawnboy_0
+  - first:
+      213: -8429884422775581932
+    second: lawnboy_1
+  - first:
+      213: -8399702508272165741
+    second: lawnboy_2
+  - first:
+      213: -3261596206234830740
+    second: lawnboy_3
+  - first:
+      213: 9018695311610024904
+    second: lawnboy_4
+  - first:
+      213: 5177577767405623482
+    second: lawnboy_5
+  - first:
+      213: -886595654028159196
+    second: lawnboy_6
+  - first:
+      213: 1170821566392650555
+    second: lawnboy_7
+  - first:
+      213: -3778263505340243062
+    second: lawnboy_8
+  - first:
+      213: -8695737290138708077
+    second: lawnboy_9
+  - first:
+      213: 2167025729122592589
+    second: lawnboy_10
+  - first:
+      213: -587271685842394725
+    second: lawnboy_11
+  - first:
+      213: -5563398526463506094
+    second: lawnboy_12
+  - first:
+      213: 470152537887316644
+    second: lawnboy_13
+  - first:
+      213: -5740843706874458628
+    second: lawnboy_14
+  - first:
+      213: 2336723087611160605
+    second: lawnboy_15
+  - first:
+      213: -7394096046411845705
+    second: lawnboy_16
+  - first:
+      213: 8728196663179452832
+    second: lawnboy_17
+  - first:
+      213: -3247013215418884859
+    second: lawnboy_18
+  - first:
+      213: 569961800620357653
+    second: lawnboy_19
+  - first:
+      213: -2091977381138291199
+    second: lawnboy_20
+  - first:
+      213: 2500031505017342343
+    second: lawnboy_21
+  - first:
+      213: 8870159107116443882
+    second: lawnboy_22
+  - first:
+      213: -7615846659361609892
+    second: lawnboy_23
+  - first:
+      213: 3619931014603028892
+    second: lawnboy_24
+  - first:
+      213: -6840007347982609905
+    second: lawnboy_25
+  - first:
+      213: -8745513106972799830
+    second: lawnboy_26
+  - first:
+      213: 2644759634713377304
+    second: lawnboy_27
+  - first:
+      213: -2067544267385944399
+    second: lawnboy_28
+  - first:
+      213: -7132203584482950868
+    second: lawnboy_29
+  - first:
+      213: -4772240147956797261
+    second: lawnboy_30
+  - first:
+      213: -2630327871104338394
+    second: lawnboy_31
+  - first:
+      213: -5760852571097610706
+    second: lawnboy_32
+  - first:
+      213: 1302964163999826766
+    second: lawnboy_33
+  - first:
+      213: 5432558594438349286
+    second: lawnboy_34
+  - first:
+      213: -5685519923819282943
+    second: lawnboy_35
+  - first:
+      213: 8763763763956391948
+    second: lawnboy_36
+  - first:
+      213: 2987322792363358800
+    second: lawnboy_37
+  - first:
+      213: 327317761273727690
+    second: lawnboy_38
+  - first:
+      213: -8800005134871667899
+    second: lawnboy_39
+  - first:
+      213: -2620964726121552456
+    second: lawnboy_40
+  - first:
+      213: -7282856131929909023
+    second: lawnboy_41
+  - first:
+      213: 7021954193973185060
+    second: lawnboy_42
+  - first:
+      213: -4650022978764094312
+    second: lawnboy_43
+  - first:
+      213: 5998015057304871844
+    second: lawnboy_44
+  - first:
+      213: -5260837241061893784
+    second: lawnboy_45
+  - first:
+      213: 7597133345169332960
+    second: lawnboy_46
+  - first:
+      213: 9083586303942341156
+    second: lawnboy_47
+  - first:
+      213: 8899207860804340781
+    second: lawnboy_48
+  - first:
+      213: -1397082359186950505
+    second: lawnboy_49
+  - first:
+      213: -5536984676172006519
+    second: lawnboy_50
+  - first:
+      213: -3237395216702882421
+    second: lawnboy_51
+  - first:
+      213: 156383338232411684
+    second: lawnboy_52
+  - first:
+      213: 3810558076279874476
+    second: lawnboy_53
+  - first:
+      213: -281071531915317019
+    second: lawnboy_54
+  - first:
+      213: 4482582110205779865
+    second: lawnboy_55
+  - first:
+      213: -3514395665323240843
+    second: lawnboy_56
+  - first:
+      213: -6707071859826377858
+    second: lawnboy_57
+  - first:
+      213: 6364983838968147075
+    second: lawnboy_58
+  - first:
+      213: 3623472450366671763
+    second: lawnboy_59
+  - first:
+      213: 2607923685458724787
+    second: lawnboy_60
+  - first:
+      213: -8946718734326296113
+    second: lawnboy_61
+  - first:
+      213: 3921301990194515139
+    second: lawnboy_62
+  - first:
+      213: 8980943135458617641
+    second: lawnboy_63
+  - first:
+      213: -2209858838467737493
+    second: lawnboy_64
+  - first:
+      213: 3190367385933928056
+    second: lawnboy_65
+  - first:
+      213: 1410924100059834872
+    second: lawnboy_66
+  - first:
+      213: 1612204012925738924
+    second: lawnboy_67
+  - first:
+      213: -7146074839233863724
+    second: lawnboy_68
+  - first:
+      213: 2516171770590161640
+    second: lawnboy_69
+  - first:
+      213: 1359772172010169753
+    second: lawnboy_70
+  - first:
+      213: 4890193409064793778
+    second: lawnboy_71
+  - first:
+      213: 505062380507585255
+    second: lawnboy_72
+  - first:
+      213: -7754147485956023294
+    second: lawnboy_73
+  - first:
+      213: -3980818022428269884
+    second: lawnboy_74
+  - first:
+      213: 1874456171507825424
+    second: lawnboy_75
+  - first:
+      213: 6132175483121422823
+    second: lawnboy_76
+  - first:
+      213: 1881958129994656704
+    second: lawnboy_77
+  - first:
+      213: -9164155832342713139
+    second: lawnboy_78
+  - first:
+      213: -4067860798088626919
+    second: lawnboy_79
+  - first:
+      213: 8338253566752804978
+    second: lawnboy_80
+  - first:
+      213: -4918301849502986470
+    second: lawnboy_81
+  - first:
+      213: -294509280436825335
+    second: lawnboy_82
+  - first:
+      213: 1698940927515838649
+    second: lawnboy_83
+  - first:
+      213: 8218463009920364671
+    second: lawnboy_84
+  - first:
+      213: 6811561671484715566
+    second: lawnboy_85
+  - first:
+      213: -3123792096122220627
+    second: lawnboy_86
+  - first:
+      213: -3779720409027739646
+    second: lawnboy_87
+  - first:
+      213: -1791636049690371746
+    second: lawnboy_88
+  - first:
+      213: -2875026968320124673
+    second: lawnboy_89
+  - first:
+      213: -6562462502202019555
+    second: lawnboy_90
+  - first:
+      213: 9057610576000477427
+    second: lawnboy_91
+  - first:
+      213: 6053613473355796778
+    second: lawnboy_92
+  - first:
+      213: 916193511690811292
+    second: lawnboy_93
+  - first:
+      213: -7380290753922646535
+    second: lawnboy_94
+  - first:
+      213: 1446281708053330604
+    second: lawnboy_95
+  - first:
+      213: -5205012087637965735
+    second: lawnboy_96
+  - first:
+      213: 6478554304455643239
+    second: lawnboy_97
+  - first:
+      213: 1469812842945872016
+    second: lawnboy_98
+  - first:
+      213: 5698938156529303232
+    second: lawnboy_99
+  - first:
+      213: -5234604279210026403
+    second: lawnboy_100
+  - first:
+      213: 1080418822935224622
+    second: lawnboy_101
+  - first:
+      213: -6506135713955526419
+    second: lawnboy_102
+  - first:
+      213: 31234839801165988
+    second: lawnboy_103
+  - first:
+      213: 921118618321282789
+    second: lawnboy_104
+  - first:
+      213: -8744537494726789089
+    second: lawnboy_105
+  - first:
+      213: 2895912057898060681
+    second: lawnboy_106
+  - first:
+      213: -4517493140085268452
+    second: lawnboy_107
+  - first:
+      213: -8911616013708463205
+    second: lawnboy_0
+  - first:
+      213: 4557611323886969850
+    second: lawnboy_1
+  - first:
+      213: -1100824976875382109
+    second: lawnboy_2
+  - first:
+      213: -3429894247705572218
+    second: lawnboy_8
+  - first:
+      213: 8101064977079662828
+    second: lawnboy_9
+  - first:
+      213: -1807072885477882744
+    second: lawnboy_10
+  - first:
+      213: -2102907665877597404
+    second: lawnboy_16
+  - first:
+      213: 5994011304066017471
+    second: lawnboy_17
+  - first:
+      213: 464168329008281082
+    second: lawnboy_18
+  - first:
+      213: 3442577236216411790
+    second: lawnboy_24
+  - first:
+      213: 8548151996895954178
+    second: lawnboy_25
+  - first:
+      213: 3239191096347361171
+    second: lawnboy_26
+  - first:
+      213: 6027693449268594364
+    second: lawnboy_32
+  - first:
+      213: 3169024167638377835
+    second: lawnboy_33
+  - first:
+      213: 939888271131326294
+    second: lawnboy_34
+  - first:
+      213: -5647810147563575668
+    second: lawnboy_40
+  - first:
+      213: -2264753186204034825
+    second: lawnboy_41
+  - first:
+      213: 1479956760933405166
+    second: lawnboy_42
+  - first:
+      213: -8769593706479058941
+    second: lawnboy_48
+  - first:
+      213: -7485618269534969402
+    second: lawnboy_49
+  - first:
+      213: -6428244593836498378
+    second: lawnboy_50
+  - first:
+      213: -8324366288980169833
+    second: lawnboy_56
+  - first:
+      213: 987860036562061036
+    second: lawnboy_57
+  - first:
+      213: -2884821378063384212
+    second: lawnboy_58
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: lawnboy_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 352
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c687c96f78b7cb2d0800000000000000
+      internalID: -3261596206234830740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_4
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 352
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c31ff15a97d82d70800000000000000
+      internalID: 9018695311610024904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_5
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 352
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab81c272c837ad740800000000000000
+      internalID: 5177577767405623482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 336
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4271f3633fd22b3f0800000000000000
+      internalID: -886595654028159196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_7
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 336
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3b4338e2089f3010800000000000000
+      internalID: 1170821566392650555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_11
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 320
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9128b2638799d7f0800000000000000
+      internalID: -587271685842394725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 288
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 259063e2486dac2b0800000000000000
+      internalID: -5563398526463506094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_13
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 288
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4aa95030e31568600800000000000000
+      internalID: 470152537887316644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_14
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 288
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfd06bc901d6450b0800000000000000
+      internalID: -5740843706874458628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1864878445bd6020800000000000000
+      internalID: 2336723087611160605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_19
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 256
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 518b485ec39e8e700800000000000000
+      internalID: 569961800620357653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_20
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 256
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 106a917d7adc7f2e0800000000000000
+      internalID: -2091977381138291199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78908d77865e1b220800000000000000
+      internalID: 2500031505017342343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_22
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae82fd836b2291b70800000000000000
+      internalID: 8870159107116443882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_23
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 240
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c57e7e450d31f4690800000000000000
+      internalID: -7615846659361609892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81af16f00e214b420800000000000000
+      internalID: 2644759634713377304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_28
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b6c011717b9e43e0800000000000000
+      internalID: -2067544267385944399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_29
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 192
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c214021c0a2550d90800000000000000
+      internalID: -7132203584482950868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b07d2eaed895cdb0800000000000000
+      internalID: -4772240147956797261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_31
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6263400ccb23f7bd0800000000000000
+      internalID: -2630327871104338394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_35
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10e7851a0c9f811b0800000000000000
+      internalID: -5685519923819282943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_36
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c00af0ef5b42f9970800000000000000
+      internalID: 8763763763956391948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_37
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 128
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05afe3c804a157920800000000000000
+      internalID: 2987322792363358800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_38
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 128
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aca856905cdda8400800000000000000
+      internalID: 327317761273727690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_39
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54b5c5a44f910e580800000000000000
+      internalID: -8800005134871667899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_43
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 894cc59dcbcc77fb0800000000000000
+      internalID: -4650022978764094312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_44
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a3e9107aea3d3350800000000000000
+      internalID: 5998015057304871844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_45
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8691c510760cdf6b0800000000000000
+      internalID: -5260837241061893784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_46
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ead71ea6807e6960800000000000000
+      internalID: 7597133345169332960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_47
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4223615dd916f0e70800000000000000
+      internalID: 9083586303942341156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_51
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8d30eee3367213d0800000000000000
+      internalID: -3237395216702882421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_52
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 426f12c41d59b2200800000000000000
+      internalID: 156383338232411684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_53
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca368a49162d1e430800000000000000
+      internalID: 3810558076279874476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_54
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e076bf4eee691cf0800000000000000
+      internalID: -281071531915317019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_55
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99f1653fda4553e30800000000000000
+      internalID: 4482582110205779865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_59
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39b0581eef8294230800000000000000
+      internalID: 3623472450366671763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_60
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b7481946c4313420800000000000000
+      internalID: 2607923685458724787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_61
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc1162f76bed6d380800000000000000
+      internalID: -8946718734326296113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_62
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cc839652634b6630800000000000000
+      internalID: 3921301990194515139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_63
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9296ef8d238b2ac70800000000000000
+      internalID: 8980943135458617641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 368
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9379388374935480800000000000000
+      internalID: -8911616013708463205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 368
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af3a4901a53ef3f30800000000000000
+      internalID: 4557611323886969850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 368
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3aa1775148519b0f0800000000000000
+      internalID: -1100824976875382109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_8
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 336
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68c8a54aa519660d0800000000000000
+      internalID: -3429894247705572218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 320
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce8f035eca3cc6070800000000000000
+      internalID: 8101064977079662828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_10
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 320
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 884c9d1f8ccfbe6e0800000000000000
+      internalID: -1807072885477882744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_16
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4238beb9e98f0d2e0800000000000000
+      internalID: -2102907665877597404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_17
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb8e78ef5810f2350800000000000000
+      internalID: 5994011304066017471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af5768ec2ae017600800000000000000
+      internalID: 464168329008281082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e86768cb1cd76cf20800000000000000
+      internalID: 3442577236216411790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_25
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 205870d73f221a670800000000000000
+      internalID: 8548151996895954178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_26
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 208
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39f7461e32be3fc20800000000000000
+      internalID: 3239191096347361171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_32
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 176
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb68a9a814ba6a350800000000000000
+      internalID: 6027693449268594364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_33
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b65a6b4b0b2aafb20800000000000000
+      internalID: 3169024167638377835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_34
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 160
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 657b65127672b0d00800000000000000
+      internalID: 939888271131326294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_40
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8660ab1892fe91b0800000000000000
+      internalID: -5647810147563575668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_41
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f8df50f9faf190e0800000000000000
+      internalID: -2264753186204034825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_42
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee19f5a35dcd98410800000000000000
+      internalID: 1479956760933405166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_48
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30080dcbcf42c4680800000000000000
+      internalID: -8769593706479058941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_49
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c1a13828ddbd1890800000000000000
+      internalID: -7485618269534969402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_50
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 632ec07a9994ac6a0800000000000000
+      internalID: -6428244593836498378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_56
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79ba91de6f8e97c80800000000000000
+      internalID: -8324366288980169833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_57
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce60617287595bd00800000000000000
+      internalID: 987860036562061036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lawnboy_58
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c614418bd3e07f7d0800000000000000
+      internalID: -2884821378063384212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

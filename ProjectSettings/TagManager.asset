@@ -8,6 +8,7 @@ TagManager:
   - Move Point
   - Wall
   - Sign
+  - Mower
   layers:
   - Default
   - TransparentFX
