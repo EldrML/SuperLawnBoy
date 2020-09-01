@@ -25,6 +25,15 @@ public class Grass1 : MonoBehaviour
         if(otherObj.CompareTag("Player") && player.currentType == PlayerController.PlayerType.wm)
         {
             //this.GetComponent<SpriteRenderer>().sortingLayerID = 6;
+            StartCoroutine(CutGrassCo());
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D otherObj)
+    {
+        if(otherObj.CompareTag("Player") && player.currentType == PlayerController.PlayerType.wm && this.gameObject.activeInHierarchy == true)
+        {
+            //this.GetComponent<SpriteRenderer>().sortingLayerID = 6;
             StartCoroutine(CutGrassCo()); 
         }
     }

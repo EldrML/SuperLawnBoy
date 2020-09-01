@@ -5,14 +5,20 @@ using UnityEngine.UI;
 
 public class Sign : MonoBehaviour
 {
+    public PlayerController player;
     public GameObject dialogBox;
     public Text dialogText;
     public string dialog;
     public bool playerInRange;
 
+    void Start()
+    {
+        // TODO : Improve the method of assigning the player controller. Needs to scale to SEVERAL objects.
+        player = (PlayerController)FindObjectOfType(typeof(PlayerController));
+    }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && playerInRange)
+        if (Input.GetKeyDown(KeyCode.Space) && player.frontData.hit.collider.tag == "Sign")
         {
             if (dialogBox.activeInHierarchy)
             {
@@ -26,15 +32,6 @@ public class Sign : MonoBehaviour
         }
     }
 
-    #region Trigger Logic
-    private void OnTriggerEnter2D(Collider2D otherObj)
-    {
-        if(otherObj.CompareTag("Player"))
-        {
-            playerInRange = true;
-        }
-    }
-
     private void OnTriggerExit2D(Collider2D otherObj)
     {
         if(otherObj.CompareTag("Player"))
@@ -43,6 +40,4 @@ public class Sign : MonoBehaviour
             dialogBox.SetActive(false);
         }
     }
-    #endregion
-
 }
