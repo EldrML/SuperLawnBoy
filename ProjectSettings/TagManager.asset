@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - Sign
   - Mower
+  - Grass
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - 
   - 
   - CollisionLayer
-  - 
+  - WalkOverLayer
   - 
   - 
   - 
@@ -52,9 +53,15 @@ TagManager:
   - name: Interactive
     uniqueID: 1410920987
     locked: 0
-  - name: Walls
-    uniqueID: 1233519153
+  - name: Mower
+    uniqueID: 2822491601
     locked: 0
   - name: Units
     uniqueID: 2603629015
+    locked: 0
+  - name: Walls
+    uniqueID: 1233519153
+    locked: 0
+  - name: Animation
+    uniqueID: 3025768811
     locked: 0

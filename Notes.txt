@@ -1,0 +1,9 @@
+if (!Physics2D.OverlapCircle(movePoint.position + horizontal, .2f, stopLayer))
+
+SOMETHING like this can be used to check if the movepoint's new position has the sign in front of it, and if so that can be used to stop the player from moving into it.
+
+https://docs.unity3d.com/ScriptReference/30_search.html?q=istouching
+This might help
+
+https://docs.unity3d.com/ScriptReference/Physics2D.OverlapCircle.html
+this also might help

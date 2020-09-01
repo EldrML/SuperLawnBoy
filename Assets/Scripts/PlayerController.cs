@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     }
     public PlayerState currentState;
     public PlayerType currentType;
+    public Mower mower;
 
     Vector2 input;
     public Vector2 lookDirection;
@@ -38,20 +39,37 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-            if (Input.GetButtonDown("Action") && currentState != PlayerState.Action && currentType == PlayerType.wm)
+        if (Input.GetButtonDown("Action") && currentState != PlayerState.Action && currentType == PlayerType.wm)
+        {
+            StartCoroutine(ActionCo());
+        }
+
+        // if (Input.GetButtonDown("Action2") && currentState == PlayerState.move && currentType == PlayerType.wm)
+        // {
+        //     Debug.Log("trying boss");
+        //     TryToDrop();
+        // }
+
+        // if (Input.GetButtonDown("Action") && currentState == PlayerState.move && currentType == PlayerType.nm)
+        // {
+        //     CheckInFront();
+        // }
+
+        if (currentState == PlayerState.move)
+        {
+            if (Input.GetButtonDown("Action2") && currentType == PlayerType.wm)
             {
-                StartCoroutine(ActionCo());
+                Debug.Log("trying boss");
+                TryToDropMower();
             }
-            
-            if (Input.GetButtonDown("Action") && currentState == PlayerState.move && currentType == PlayerType.nm)
+
+            if (Input.GetButtonDown("Action") && currentType == PlayerType.nm)
             {
                 CheckInFront();
             }
 
-            if (currentState == PlayerState.move)
-            {
-                GetMove();
-            }
+            GetMove();
+        }
     }
     #endregion
 
@@ -75,13 +93,13 @@ public class PlayerController : MonoBehaviour
             {
                 input.x = 0f;
             }
-            
+
             // // Update look direction if movement occurs
             // if(input != Vector2.zero)
             // {
             //     lookDirection = input;                  //Direction of RayCast for collision checking
             // }
-            
+
             // Move if allowed
             if (CanMove())                          //If no collision, move the player.
             {
@@ -119,23 +137,25 @@ public class PlayerController : MonoBehaviour
         if (Vector3.Distance(transform.position, movePoint.position) <= 0.05f)
         {
             RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(input), playerViewRange);
-        //Debug.DrawRay(transform.position, playerViewRange * transform.TransformDirection(input), Color.red, 0.25f);
+            //Debug.DrawRay(transform.position, playerViewRange * transform.TransformDirection(input), Color.red, 0.25f);
 
-        if (hit)
-        {
-            return false;
-            /* HERE IS WHERE TO ADD IN EXCEPTIONS TO THE HIT RULE!
-            if (hit.collider.tag == "Wall")
+            if (hit)
             {
-                //Debug.Log("Hit Something : " + hit.collider.tag);
-                return false;
+                // Exceptions to the hit raycast.
+                if (hit.collider.tag == "Grass")
+                {
+                    //Debug.Log("Hit Something : " + hit.collider.tag);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            */
-        }
-        return true;
+            return true;
         }
         return false;
-        
+
     }
 
     void CheckInFront() //Similar to CanMove function, but hopefully can be expanded if needed.
@@ -156,18 +176,33 @@ public class PlayerController : MonoBehaviour
             }
             if (hit.collider.tag == "Mower")
             {
-                //Debug.Log("That's a " + hit.collider.tag + ".");
-                interactiveObject = hit.collider.gameObject;
-                Destroy(interactiveObject);
+                mower.gameObject.SetActive(false);
                 currentType = PlayerType.wm;
                 animator.SetBool("HasMower", true);
-                //interactiveObject.ReadSign();
             }
         }
         else
         {
 
         }
+    }
+
+    void TryToDropMower() //Similar to CanMove function, but hopefully can be expanded if needed.
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(lookDirection), playerViewRange);
+        Debug.DrawRay(transform.position, playerViewRange * transform.TransformDirection(lookDirection), Color.red, 0.25f);
+        if (!hit && CanMove())
+        {
+            
+            mower.transform.position = this.transform.TransformPoint(lookDirection);
+            mower.mowerDirection = lookDirection;
+            mower.gameObject.SetActive(true);
+            //Debug.Log(interactiveObject.transform.TransformDirection);
+            //Instantiate(mower, lookDirection, Quaternion.identity);
+            currentType = PlayerType.nm;
+            animator.SetBool("HasMower", false);
+        }
+        else {}
     }
 
     #region Extra Functions
