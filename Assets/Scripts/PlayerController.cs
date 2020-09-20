@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
     {
         if (currentState == PlayerState.move)
         {
-            frontData = CheckIfEmpty();
+            frontData = CheckInFront();
 
             if (Input.GetButtonDown("Action"))
             {
@@ -55,10 +55,6 @@ public class PlayerController : MonoBehaviour
                 {
                     StartCoroutine(ActionCo());
                 }
-                // else if (currentType == PlayerType.wm && frontData.hit)
-                // {
-                //     EvaluateHit();
-                // }
                 else
                 {
                     EvaluateHit();
@@ -66,7 +62,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (Input.GetButtonDown("Action2")) // Pick up the mower.
             {
-                PickAndDropMower();
+                mower.PickUpAndDropMower();
             }
 
             GetMove();
@@ -95,14 +91,8 @@ public class PlayerController : MonoBehaviour
                 input.x = 0f;
             }
 
-            // // Update look direction if movement occurs
-            // if(input != Vector2.zero)
-            // {
-            //     lookDirection = input;                  //Direction of RayCast for collision checking
-            // }
-
-            // Move if allowed
-            if (CanMove())                          //If no collision, move the player.
+            //If no collision, move the player.
+            if (CanMove())                          
             {
                 Vector3 moveVector = new Vector3(input.x, input.y, 0f);
                 movePoint.position += moveVector;
@@ -111,7 +101,7 @@ public class PlayerController : MonoBehaviour
             // -- Animation/Look Direction Control -- //
             if (input != Vector2.zero)
             {
-                lookDirection = input;                  //Direction of RayCast for collision checking
+                lookDirection = input;                      //Direction of RayCast for collision checking
                 animator.SetFloat("Horizontal", input.x);
                 animator.SetFloat("Vertical", input.y);
                 animator.SetBool("Moving", true);
@@ -123,18 +113,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator ActionCo()  // Performs an action (CURRENTLY JUST MOWER THUMBS UP)
-    {
-        yield return new WaitUntil(() => CanMove());
-        animator.SetBool("Action", true);
-        currentState = PlayerState.Action;
-        yield return null;
-        animator.SetBool("Action", false);
-        yield return new WaitForSeconds(1f);
-        currentState = PlayerState.move;
-    }
-
-    bool CanMove() // Checks if there is a collision object in the direction of desired movement.
+    public bool CanMove() // Checks if there is a collision object in the direction of desired movement.
     {
         if (Vector3.Distance(transform.position, movePoint.position) <= 0.0001f)
         {
@@ -159,7 +138,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    (bool, RaycastHit2D) CheckIfEmpty() // Check if there is something in front of player when called.
+    (bool, RaycastHit2D) CheckInFront() // Check if there is something in front of player when called.
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(lookDirection), playerViewRange);
         Debug.DrawRay(transform.position, playerViewRange * transform.TransformDirection(lookDirection), Color.red, 0.25f);
@@ -197,31 +176,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void PickAndDropMower() //Push a button to grab and release the mower.
+    IEnumerator ActionCo()  // Performs an action (CURRENTLY JUST MOWER THUMBS UP)
     {
-        if (CanMove())
-        {
-            if (frontData.hit)
-            {
-                if (currentType == PlayerType.nm && frontData.hit.collider.tag == "Mower")
-                {
-                    mower.gameObject.SetActive(false);
-                    currentType = PlayerType.wm;
-                    animator.SetBool("HasMower", true);
-                }
-                else { }
-            }
-
-            if (currentType == PlayerType.wm && frontData.isEmpty)
-            {
-                mower.transform.position = this.transform.TransformPoint(lookDirection);
-                mower.mowerDirection = lookDirection;
-                mower.gameObject.SetActive(true);
-                currentType = PlayerType.nm;
-                animator.SetBool("HasMower", false);
-            }
-            else { }
-        }
+        yield return new WaitUntil(() => CanMove());
+        animator.SetBool("Action", true);
+        currentState = PlayerState.Action;
+        yield return null;
+        animator.SetBool("Action", false);
+        yield return new WaitForSeconds(1f);
+        currentState = PlayerState.move;
     }
 
     #region Extra Functions
@@ -238,22 +201,6 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Moving", false);
         }
 
-    }
-
-    void TryToDropMower() //Similar to CanMove function, but hopefully can be expanded if needed.
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(lookDirection), playerViewRange);
-        Debug.DrawRay(transform.position, playerViewRange * transform.TransformDirection(lookDirection), Color.red, 0.25f);
-        if (!hit && CanMove())
-        {
-
-            mower.transform.position = this.transform.TransformPoint(lookDirection);
-            mower.mowerDirection = lookDirection;
-            mower.gameObject.SetActive(true);
-            currentType = PlayerType.nm;
-            animator.SetBool("HasMower", false);
-        }
-        else { }
     }
     #endregion
 }
