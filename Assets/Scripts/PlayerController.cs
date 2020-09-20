@@ -7,12 +7,12 @@ public class PlayerController : MonoBehaviour
     #region Variable Definitions
     public Transform movePoint;
     public Animator animator;
-    public GameObject interactiveObject;
+    public GameObject collisionObj;
     public Mower mower;
+    public Box box;
     public Vector2 lookDirection;
 
     public float moveSpeed;
-    public bool reading = false;
 
     public enum PlayerState
     {
@@ -51,18 +51,28 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetButtonDown("Action"))
             {
-                if (currentType == PlayerType.wm && frontData.isEmpty)
+                if (currentType == PlayerType.wm && frontData.isEmpty) //#TODO This is where the action bug happens.
                 {
                     StartCoroutine(ActionCo());
                 }
-                else
+
+                if (box && currentType == PlayerType.carry && box.boxState == Box.BoxStates.isHeld)
                 {
-                    EvaluateHit();
+                    box.Throw();
                 }
+            
             }
             else if (Input.GetButtonDown("Action2")) // Pick up the mower.
             {
-                mower.PickUpAndDropMower();
+                EvaluateHit();
+                if (mower)
+                {
+                    mower.PickUpAndDropMower();
+                }
+                if (box)
+                {
+                    box.PickUpAndDrop();
+                }
             }
 
             GetMove();
@@ -92,7 +102,7 @@ public class PlayerController : MonoBehaviour
             }
 
             //If no collision, move the player.
-            if (CanMove())                          
+            if (CanMove())
             {
                 Vector3 moveVector = new Vector3(input.x, input.y, 0f);
                 movePoint.position += moveVector;
@@ -167,12 +177,26 @@ public class PlayerController : MonoBehaviour
 
         if (frontData.hit)
         {
-            if (frontData.hit.collider.tag == "Wall")
-            { }
-            if (frontData.hit.collider.tag == "Sign")
-            { }
-            else
-            { }
+            collisionObj = frontData.hit.transform.gameObject;
+
+            if (currentType == PlayerType.nm)
+            {
+                if (collisionObj.tag == "Mower")
+                {
+                    mower = collisionObj.GetComponent<Mower>();
+                }
+                if (collisionObj.tag == "Box")
+                {
+                    box = collisionObj.GetComponent<Box>();
+                }
+            }
+
+            // if (frontData.hit.collider.tag == "Wall")
+            // { }
+            // if (frontData.hit.collider.tag == "Sign")
+            // { }
+            // else
+            // { }
         }
     }
 

@@ -4,47 +4,145 @@ using UnityEngine;
 
 public class Box : MonoBehaviour
 {
-    // Variables
+    # region Variable Definitions
     public PlayerController player;
-    public Transform destination;
-    public bool isHeld;
+    public SpriteRenderer sprite;
+    public Vector3 carryHeight;
+
+    public enum BoxStates
+    {
+        onGround, isHeld, isThrown     // With/without lawnmower
+    }
+    public BoxStates boxState;
+    // public bool isHeld;
+    // public bool isThrown; 
+    public LayerMask ignoreGrass;
+
+    //Throw Variables
+    [SerializeField] float launchAngle = 45f;
+    [SerializeField] float g = -9.81f;
+    [SerializeField] float airtime = 1f;
+    [SerializeField] RaycastHit2D throwHit;
+
+    # endregion
 
     void Start()
     {
         // TODO : Improve the method of assigning the player controller. Needs to scale to SEVERAL objects.
-        //player = (PlayerController)FindObjectOfType(typeof(PlayerController));
+        boxState = BoxStates.onGround;
+        player = (PlayerController)FindObjectOfType(typeof(PlayerController));
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("Action2"))
+        //Being carried update.
+        if (boxState == BoxStates.isHeld)
         {
-            if (player.currentType == PlayerController.PlayerType.nm &&
-                        player.frontData.hit)
+            transform.position = player.transform.position + carryHeight;
+        }
+
+        //Being thrown update.
+        if (boxState == BoxStates.isThrown)
+        {
+            //transform.position = player.transform.position + carryHeight;
+        }
+
+    }
+
+    public void PickUpAndDrop()
+    {
+        if (player.CanMove())
+        {
+            if (player.frontData.hit)
             {
-                if (player.frontData.hit.collider.tag == "Box")
+                if (player.currentType == PlayerController.PlayerType.nm &&
+                    player.frontData.hit.collider.tag == this.tag)
                 {
-                    isHeld = true;
+                    boxState = BoxStates.isHeld;
+                    sprite.sortingLayerName = "CarryItem";
                     player.currentType = PlayerController.PlayerType.carry;
                 }
             }
 
             if (player.currentType == PlayerController.PlayerType.carry && player.frontData.isEmpty)
             {
-                isHeld = false;
-                this.transform.position = player.transform.TransformPoint(player.lookDirection);
-                //this.mowerDirection = player.lookDirection;
-                //mower.gameObject.SetActive(true);
+                boxState = BoxStates.onGround;
+                transform.position = player.transform.TransformPoint(player.lookDirection);
                 player.currentType = PlayerController.PlayerType.nm;
-                //animator.SetBool("HasMower", false);
+                sprite.sortingLayerName = "Interactive";
             }
             else { }
         }
+    }
 
-        if (isHeld)
+    public void Throw()
+    {
+        if (player.CanMove())
         {
-            this.transform.position = destination.transform.position;
-        }
+            //Check 1 block ahead of player.
 
+            throwHit = Physics2D.Raycast(player.transform.position,
+                                        player.transform.TransformDirection(player.lookDirection),
+                                        2f, ~ignoreGrass); //#TODO This is where you can ignore layers when checking for a throw. Spikes and stuff might matter later.
+
+
+            //If there is a collision within two tiles.
+            if (throwHit)
+            {
+                if (throwHit.distance < 1) //Check first tile ahead.
+                {
+                    if (throwHit.collider.tag == "Mower")
+                    {
+                        Debug.Log("Throw one tile to destroy enemy.");
+                    }
+                    else
+                    {
+                        Debug.Log("Can't throw here.");
+                    }
+                }
+                else if (throwHit.distance < 2) //Check second tile ahead.
+                {
+                    if (throwHit.collider.tag == "Mower")
+                    {
+                        Debug.Log("Throw two tiles to destroy enemy.");
+                    }
+                    else
+                    {
+                        Debug.Log("Throw one tile to avoid collision.");
+                    }
+                }
+            }
+
+
+
+            // if (throwHit)
+            // {
+
+
+            //     }
+            //     else
+            //     {
+            //         Debug.Log("Can't throw here.");
+            //     }
+            // }
+            // else if (!throwHit)
+            // {
+            //     Debug.Log("Checking two tiles ahead.");
+            // }
+
+            // else
+            // {
+            //     Debug.Log("BLEH");        
+            // }
+
+            //Check 2 blocks ahead of player.
+            // throwHit = Physics2D.Raycast(player.transform.position,
+            //                             player.transform.TransformDirection(player.lookDirection),
+            //                             2f);
+
+            // sprite.sortingLayerName = "Interactive";
+            // isHeld = false;
+        }
     }
 }

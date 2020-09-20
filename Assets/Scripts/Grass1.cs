@@ -6,12 +6,15 @@ public class Grass1 : MonoBehaviour
 {
     public PlayerController player;
     public Animator grassAnimator;
+    public SpriteRenderer sprite;
+
     // Start is called before the first frame update
     void Start()
     {
         
         // TODO : Improve the method of assigning the player controller. Needs to scale to MANY grass objects.
         player = (PlayerController)FindObjectOfType(typeof(PlayerController));
+        sprite = this.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -40,11 +43,12 @@ public class Grass1 : MonoBehaviour
 
     IEnumerator CutGrassCo()  // Performs an action (CURRENTLY JUST MOWER THUMBS UP)
     {
-        this.GetComponent<SpriteRenderer>().sortingLayerName = "Animation";
+        sprite.sortingLayerName = "GrassAnimation";
         grassAnimator.SetBool("IsCut", true);
+        //this.gameObject.SetActive(false);
         Debug.Log("Grass Destroyed");
         yield return new WaitForSeconds(0.25f);
         this.gameObject.SetActive(false);
-        this.GetComponent<SpriteRenderer>().sortingLayerName = "Interactive";
+        sprite.sortingLayerName = "Interactive";
     }
 }

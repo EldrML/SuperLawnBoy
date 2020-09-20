@@ -63,6 +63,9 @@ TagManager:
   - name: Walls
     uniqueID: 1233519153
     locked: 0
-  - name: Animation
+  - name: GrassAnimation
     uniqueID: 3025768811
+    locked: 0
+  - name: CarryItem
+    uniqueID: 4149989699
     locked: 0
