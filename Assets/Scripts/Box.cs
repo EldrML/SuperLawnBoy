@@ -8,6 +8,8 @@ public class Box : MonoBehaviour
     public PlayerController player;
     public SpriteRenderer sprite;
     public Vector3 carryHeight;
+    public Rigidbody2D gravityBody;
+    public Vector3 throwLocation;
 
     public enum BoxStates
     {
@@ -19,10 +21,15 @@ public class Box : MonoBehaviour
     public LayerMask ignoreGrass;
 
     //Throw Variables
-    [SerializeField] float launchAngle = 45f;
-    [SerializeField] float g = -9.81f;
-    [SerializeField] float airtime = 1f;
+    [SerializeField] float launchAngle;
+    // [SerializeField] float g = -9.81f;
+    // [SerializeField] float airtime = 1f;
+    // [SerializeField] float launchSpeed;
     [SerializeField] RaycastHit2D throwHit;
+
+    float height = 4f;
+    bool startThrow = false;
+    float incrementor = 0;
 
     # endregion
 
@@ -32,6 +39,8 @@ public class Box : MonoBehaviour
         boxState = BoxStates.onGround;
         player = (PlayerController)FindObjectOfType(typeof(PlayerController));
         sprite = GetComponent<SpriteRenderer>();
+        gravityBody = GetComponent<Rigidbody2D>();
+        launchAngle = Mathf.PI * 45 / 180;
     }
 
     void Update()
@@ -40,13 +49,27 @@ public class Box : MonoBehaviour
         if (boxState == BoxStates.isHeld)
         {
             transform.position = player.transform.position + carryHeight;
+            //throwLocation = player.transform.position + new Vector3(2 * player.lookDirection.x, 2 * player.lookDirection.y, 0);
         }
 
-        //Being thrown update.
+
+
+        // //Being thrown update.
         if (boxState == BoxStates.isThrown)
         {
-            //transform.position = player.transform.position + carryHeight;
+            ThrowBox(player.transform.position + carryHeight, throwLocation, boxState == BoxStates.isThrown);
         }
+
+        //     // Vector3 test = transform.position - throwLocation;
+        //     // Debug.Log(test.magnitude);
+
+        //     // // if (test.magnitude <= 1.5)
+        //     // // {
+        //     //     boxState = BoxStates.onGround;
+        //     //     player.currentType = PlayerController.PlayerType.nm;
+        //     //     sprite.sortingLayerName = "Interactive";
+        //     // // }
+        // }
 
     }
 
@@ -76,12 +99,10 @@ public class Box : MonoBehaviour
         }
     }
 
-    public void Throw()
+    public void CheckForThrow()
     {
         if (player.CanMove())
         {
-            //Check 1 block ahead of player.
-
             throwHit = Physics2D.Raycast(player.transform.position,
                                         player.transform.TransformDirection(player.lookDirection),
                                         2f, ~ignoreGrass); //#TODO This is where you can ignore layers when checking for a throw. Spikes and stuff might matter later.
@@ -95,6 +116,8 @@ public class Box : MonoBehaviour
                     if (throwHit.collider.tag == "Mower")
                     {
                         Debug.Log("Throw one tile to destroy enemy.");
+                        throwLocation = player.transform.position + new Vector3(player.lookDirection.x, player.lookDirection.y, 0);
+                        boxState = BoxStates.isThrown;
                     }
                     else
                     {
@@ -106,43 +129,58 @@ public class Box : MonoBehaviour
                     if (throwHit.collider.tag == "Mower")
                     {
                         Debug.Log("Throw two tiles to destroy enemy.");
+                        throwLocation = player.transform.position + new Vector3(2 * player.lookDirection.x, 2 * player.lookDirection.y, 0);
+                        boxState = BoxStates.isThrown;
                     }
                     else
                     {
                         Debug.Log("Throw one tile to avoid collision.");
+                        throwLocation = player.transform.position + new Vector3(player.lookDirection.x, player.lookDirection.y, 0);
+                        boxState = BoxStates.isThrown;
                     }
                 }
             }
+            else
+            {
+                Debug.Log("Throw two tiles.");
+                throwLocation = player.transform.position + new Vector3(2 * player.lookDirection.x, 2 * player.lookDirection.y, 0);
+                boxState = BoxStates.isThrown;
+            }
 
-
-
-            // if (throwHit)
-            // {
-
-
-            //     }
-            //     else
-            //     {
-            //         Debug.Log("Can't throw here.");
-            //     }
-            // }
-            // else if (!throwHit)
-            // {
-            //     Debug.Log("Checking two tiles ahead.");
-            // }
-
-            // else
-            // {
-            //     Debug.Log("BLEH");        
-            // }
-
-            //Check 2 blocks ahead of player.
-            // throwHit = Physics2D.Raycast(player.transform.position,
-            //                             player.transform.TransformDirection(player.lookDirection),
-            //                             2f);
-
-            // sprite.sortingLayerName = "Interactive";
-            // isHeld = false;
         }
     }
+
+    void ThrowBox(Vector3 startPos, Vector3 endPos, bool startThrow)
+    {
+
+        // Update is called once per frame
+        //boxState = BoxStates.isThrown; //#TODO this state may be unnecessary, but for now let's keep it in.
+        //Vector3 startPos = player.transform.position + carryHeight;
+        //Vector3 endPos = throwLocation;
+
+        if (startThrow)
+        {
+            incrementor += 0.03f;
+            Vector3 currentPos = Vector3.Lerp(startPos, endPos, incrementor);
+            currentPos.z += height * Mathf.Sin(Mathf.Clamp01(incrementor) * Mathf.PI);
+            transform.position = currentPos;
+        }
+        if (transform.position == endPos)
+        {
+            startThrow = false;
+            incrementor = 0;
+            Vector3 tempPos = startPos;
+            startPos = transform.position;
+            endPos = tempPos;
+
+            boxState = BoxStates.onGround;
+            player.currentType = PlayerController.PlayerType.nm;
+            sprite.sortingLayerName = "Interactive";
+        }
+        // if (boxState == BoxStates.isThrown)
+        // {
+        //     startThrow = true;
+        // }
+    }
+
 }
