@@ -18,23 +18,27 @@ public class Sign : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && player.frontData.hit.collider.tag == "Sign")
+        if (Input.GetKeyDown(KeyCode.Space) && player.frontData.hit)
         {
-            if (dialogBox.activeInHierarchy)
+            if (player.frontData.hit.collider.tag == "Sign")
             {
-                dialogBox.SetActive(false);
+                if (dialogBox.activeInHierarchy)
+                {
+                    dialogBox.SetActive(false);
+                }
+                else
+                {
+                    dialogBox.SetActive(true);
+                    dialogText.text = dialog;
+                }
             }
-            else
-            {
-                dialogBox.SetActive(true);
-                dialogText.text = dialog;
-            }
+
         }
     }
 
     private void OnTriggerExit2D(Collider2D otherObj)
     {
-        if(otherObj.CompareTag("Player"))
+        if (otherObj.CompareTag("Player"))
         {
             playerInRange = false;
             dialogBox.SetActive(false);

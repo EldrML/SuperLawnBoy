@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     }
     public enum PlayerType
     {
-        nm, wm     // With/without lawnmower
+        nm, wm, carry     // With/without lawnmower
     }
     public PlayerState currentState;
     public PlayerType currentType;
@@ -182,29 +182,37 @@ public class PlayerController : MonoBehaviour
     void EvaluateHit() //Check things in front of the player.
     {
         //Useful for talking to NPCs and interacting with things...
-        
+
         //#TODO: TRY TO MAKE THIS FUNCTION UNNECESSARY BY HAVING THE FUNCTIONALITY BE HANDLED IN OTHER OBJECT SCRIPTS, WHERE POSSIBLE.
         RaycastHit2D hit = frontData.hit;
 
-        if (frontData.hit.collider.tag == "Wall")
-        {}
-        if (frontData.hit.collider.tag == "Sign")
-        {}
-        else
-        {}
+        if (frontData.hit)
+        {
+            if (frontData.hit.collider.tag == "Wall")
+            { }
+            if (frontData.hit.collider.tag == "Sign")
+            { }
+            else
+            { }
+        }
     }
 
     void PickAndDropMower() //Push a button to grab and release the mower.
     {
         if (CanMove())
         {
-            if (currentType == PlayerType.nm && frontData.hit.collider.tag == "Mower")
+            if (frontData.hit)
             {
-                mower.gameObject.SetActive(false);
-                currentType = PlayerType.wm;
-                animator.SetBool("HasMower", true);
+                if (currentType == PlayerType.nm && frontData.hit.collider.tag == "Mower")
+                {
+                    mower.gameObject.SetActive(false);
+                    currentType = PlayerType.wm;
+                    animator.SetBool("HasMower", true);
+                }
+                else { }
             }
-            else if (currentType == PlayerType.wm && frontData.isEmpty)
+
+            if (currentType == PlayerType.wm && frontData.isEmpty)
             {
                 mower.transform.position = this.transform.TransformPoint(lookDirection);
                 mower.mowerDirection = lookDirection;
