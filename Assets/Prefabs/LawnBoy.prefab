@@ -149,14 +149,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd20ff562bec964bb7f52a04ff373e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
   movePoint: {fileID: 1369101682}
   animator: {fileID: 4518269238913542739}
-  interactiveObject: {fileID: 0}
+  collisionObj: {fileID: 0}
+  mower: {fileID: 0}
+  box: {fileID: 0}
+  lookDirection: {x: 0, y: 0}
+  moveSpeed: 4
   currentState: 0
   currentType: 0
-  mower: {fileID: 0}
-  lookDirection: {x: 0, y: 0}
 --- !u!50 &1413807270
 Rigidbody2D:
   serializedVersion: 4

@@ -59,7 +59,6 @@ public class PlayerController : MonoBehaviour
                 if (box && currentType == PlayerType.carry && box.boxState == Box.BoxStates.isHeld)
                 {
                     box.CheckForThrow();
-                    //box.boxState = Box.BoxStates.isThrown;
                 }
             
             }

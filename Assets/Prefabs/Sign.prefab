@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7936926137705282179}
   - component: {fileID: 8280602667966735766}
   - component: {fileID: 8728955968941923316}
+  - component: {fileID: 47644529}
   m_Layer: 0
   m_Name: Sign
   m_TagString: Sign
@@ -76,8 +77,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1691338281
-  m_SortingLayer: 4
+  m_SortingLayerID: 1410920987
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 5478840912183604984, guid: 220c254c55d6ee04cb068595ea3ecbe0,
     type: 3}
@@ -160,3 +161,19 @@ MonoBehaviour:
   dialogText: {fileID: 0}
   dialog: he needs his bike
   playerInRange: 0
+--- !u!58 &47644529
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7448866607926411604}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.51
