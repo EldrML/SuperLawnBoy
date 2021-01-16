@@ -54,10 +54,10 @@ public class Box : MonoBehaviour
         if (player.CanMove())
         {
             //Pick up box.
-            if (player.frontData.hit)
+            if (player.frontData)
             {
                 if (player.currentType == PlayerController.PlayerType.nm &&
-                    player.frontData.hit.collider.tag == this.tag)
+                    player.frontData.collider.tag == this.tag)
                 {
                     //Adjust the object's parameters.
                     boxState = BoxStates.isHeld;                                //Switch states.
@@ -69,7 +69,7 @@ public class Box : MonoBehaviour
             }
 
             //Set down box.
-            if (player.currentType == PlayerController.PlayerType.carry && player.frontData.isEmpty)
+            if (player.currentType == PlayerController.PlayerType.carry && !player.frontData)
             {
                 boxState = BoxStates.onGround;
                 transform.position = player.transform.TransformPoint(player.lookDirection);

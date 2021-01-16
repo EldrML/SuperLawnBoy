@@ -7,9 +7,9 @@ public class PlayerController : MonoBehaviour
     #region Variable Definitions
     public Transform movePoint;
     public Animator animator;
-    public GameObject collisionObj;
-    public Mower mower;
-    public Box box;
+
+    public Interactable interactiveObj;
+
     public Vector2 lookDirection;
 
     public float moveSpeed;
@@ -25,62 +25,41 @@ public class PlayerController : MonoBehaviour
     public PlayerState currentState;
     public PlayerType currentType;
 
-
     Vector2 input;
     float playerViewRange = 1f;
-    public (bool isEmpty, RaycastHit2D hit) frontData;
-    // public bool isEmpty = true;
-    // public RaycastHit2D hit;
-    //(PlayerState currentState, PlayerType currentType)playerSwitches; Tuple for simplifying things later on?
+    public RaycastHit2D frontData;
     #endregion
 
     #region Main Logic Loop
     void Start()
     {
-        movePoint.parent = null;
-        lookDirection = Vector2.down;
-        currentState = PlayerState.move;
-        currentType = PlayerType.nm;
+        movePoint.parent = null;            //Initializes the player's move-point,
+        lookDirection = Vector2.down;       //Raycast direction,
+        currentState = PlayerState.move;    //PlayerState (move, carry, etc),
+        currentType = PlayerType.nm;        //PlayerType (mower, no mower)
     }
 
     void Update()
     {
         if (currentState == PlayerState.move)
         {
-            frontData = CheckInFront();
-
-            if (Input.GetButtonDown("Action"))
+            if (Input.GetButtonDown("Action2"))
             {
-                if (currentType == PlayerType.wm && frontData.isEmpty) //#TODO This is where the action bug happens.
-                {
-                    StartCoroutine(ActionCo());
-                }
+                Interact(1, currentState, currentType);
+            }
 
-                if (box && currentType == PlayerType.carry && box.boxState == Box.BoxStates.isHeld)
-                {
-                    box.CheckForThrow();
-                }
-            
-            }
-            else if (Input.GetButtonDown("Action2")) // Pick up the mower.
-            {
-                EvaluateHit();
-                if (mower)
-                {
-                    mower.PickUpAndDropMower();
-                }
-                if (box)
-                {
-                    box.PickUpAndDrop();
-                }
-            }
+            // else if (Input.GetButtonDown("Action")) 
+            // {
+            //     Interact(2, currentState, currentType);
+            // }
 
             GetMove();
         }
     }
     #endregion
 
-    void GetMove()  //Moves the player and sets proper animations
+    void GetMove()
+    //Moves the player and sets proper animations
     {
         //Move player
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
@@ -123,80 +102,75 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public bool CanMove() // Checks if there is a collision object in the direction of desired movement.
+    public bool CanMove()
+    // Checks if there is a collision object in the direction of desired movement.
     {
         if (Vector3.Distance(transform.position, movePoint.position) <= 0.0001f)
         {
             RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(input), playerViewRange);
-            Debug.DrawRay(transform.position, playerViewRange * transform.TransformDirection(input), Color.red, 0.25f);
+            Debug.DrawRay(transform.position, playerViewRange * transform.TransformDirection(lookDirection), Color.cyan, 0.25f);
 
             if (hit)
             {
-                // Exceptions to the hit raycast.
-                if (hit.collider.tag == "Grass")
-                {
-                    return true;
-                }
+                if (hit.transform.gameObject.layer == 6 || hit.transform.gameObject.layer == 3) //Impassable or Interactable Objects
+                { return false; }           //Can't move.
                 else
-                {
-                    return false;
-                }
+                { return true; }            //Can move.
             }
-            return true;
+
+            return true;                    //No hit, can move.
         }
-        return false;
+
+        return false;                       //Too early to move.
 
     }
 
-    (bool, RaycastHit2D) CheckInFront() // Check if there is something in front of player when called.
+    void Interact(int buttonNum, PlayerState state, PlayerType type)
+    //Interacts with things in front of the player. (NPCs, mowers, boxes, etc.)
     {
+        //Cast a ray one tile in front of the player.
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(lookDirection), playerViewRange);
         Debug.DrawRay(transform.position, playerViewRange * transform.TransformDirection(lookDirection), Color.red, 0.25f);
 
-        if (frontData.hit)
+        if (hit) //If the ray hits an object
         {
-            // -- ADD HIT EXCEPTIONS HERE -- //
-            if (frontData.hit.collider.tag == "Grass")
+            if (interactiveObj != null) //Interactable has been set at least once.
             {
-                return (true, hit);
-            }
-            return (false, hit);
-        }
-        else
-        {
-            return (true, hit);
-        }
-    }
 
-    void EvaluateHit() //Check things in front of the player.
-    {
-        //Useful for talking to NPCs and interacting with things...
-
-        //#TODO: TRY TO MAKE THIS FUNCTION UNNECESSARY BY HAVING THE FUNCTIONALITY BE HANDLED IN OTHER OBJECT SCRIPTS, WHERE POSSIBLE.
-        RaycastHit2D hit = frontData.hit;
-
-        if (frontData.hit)
-        {
-            collisionObj = frontData.hit.transform.gameObject;
-
-            if (currentType == PlayerType.nm)
-            {
-                if (collisionObj.tag == "Mower")
+                if (hit.collider.transform.name != interactiveObj.transform.name)   //Different Interactable.
                 {
-                    mower = collisionObj.GetComponent<Mower>();
+                    interactiveObj.isFocus = false;    
+                    interactiveObj.player = null;
+                    interactiveObj = hit.collider.GetComponent<Interactable>();
+                    interactiveObj.isFocus = true;
+                    interactiveObj.player = transform;
+                    //Debug.Log("SAME OBJECT");
                 }
-                if (collisionObj.tag == "Box")
+                else                                                                //Same Interactable
                 {
-                    box = collisionObj.GetComponent<Box>();
+                    //interactiveObj = hit.collider.GetComponent<Interactable>();
                 }
             }
+            else //Set interactable for the first, if possible.
+            {
+                interactiveObj = hit.collider.GetComponent<Interactable>();     //Make this the interactive object.
+                interactiveObj.player = transform;                              //
+                interactiveObj.isFocus = true;
+            }
 
-            // if (frontData.hit.collider.tag == "Wall")
-            // { }
-            // if (frontData.hit.collider.tag == "Sign")
-            // { }
-            // else
-            // { }
+            //Make that object the focused interactive.
+
+
+
+
+            if (currentType == PlayerType.nm)   //Player does not have mower.
+            {
+                interactiveObj.Interact(buttonNum, 1);
+            }
+            else                                //Player has mower.
+            {
+                interactiveObj.Interact(buttonNum, 2);
+            }
         }
     }
 

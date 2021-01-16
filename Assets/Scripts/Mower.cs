@@ -31,10 +31,10 @@ public class Mower : MonoBehaviour
         if (player.CanMove())
         {
             //Pick Up Mower logic.
-            if (player.frontData.hit)
+            if (player.frontData)
             {
                 if (player.currentType == PlayerController.PlayerType.nm &&
-                    player.frontData.hit.collider.tag == "Mower")
+                    player.frontData.collider.tag == "Mower")
                 {
                     this.gameObject.SetActive(false);
                     player.currentType = PlayerController.PlayerType.wm;
@@ -45,7 +45,7 @@ public class Mower : MonoBehaviour
 
             //Drop Mower logic.
             if (player.currentType == PlayerController.PlayerType.wm && 
-                player.frontData.isEmpty)
+                !player.frontData)
             {
                 this.transform.position = player.transform.TransformPoint(player.lookDirection);
                 this.mowerDirection = player.lookDirection;

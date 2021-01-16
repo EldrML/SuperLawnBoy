@@ -3,44 +3,51 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Sign : MonoBehaviour
+public class Sign : Interactable
 {
-    public PlayerController player;
+    //public PlayerController player;
     public GameObject dialogBox;
     public Text dialogText;
     public string dialog;
-    public bool playerInRange;
+    //public bool playerInRange;
 
     void Start()
     {
         // TODO : Improve the method of assigning the player controller. Needs to scale to SEVERAL objects.
-        player = (PlayerController)FindObjectOfType(typeof(PlayerController));
+        //player = (PlayerController)FindObjectOfType(typeof(PlayerController));
     }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && player.frontData.hit)
-        {
-            if (player.frontData.hit.collider.tag == "Sign")
-            {
-                if (dialogBox.activeInHierarchy)
-                {
-                    dialogBox.SetActive(false);
-                }
-                else
-                {
-                    dialogBox.SetActive(true);
-                    dialogText.text = dialog;
-                }
-            }
 
+    public override void Interact(int buttonNum, int state)
+    {
+        base.Interact(buttonNum, state);
+        
+        if (inRange && isFocus)
+        {
+            if (buttonNum == 1 && state == 1)
+            {
+                ReadSign();
+            }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D otherObj)
+    void ReadSign()
     {
-        if (otherObj.CompareTag("Player"))
+        if (dialogBox.activeInHierarchy)
         {
-            playerInRange = false;
+            dialogBox.SetActive(false);
+        }
+        else
+        {
+            dialogBox.SetActive(true);
+            dialogText.text = dialog;
+        }
+    }
+
+    public override void Update()
+    {
+        base.Update();
+        if (dialogBox.activeInHierarchy && !inRange && !isFocus)
+        {
             dialogBox.SetActive(false);
         }
     }
