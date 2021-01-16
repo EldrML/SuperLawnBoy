@@ -42,8 +42,8 @@ GameObject:
   - component: {fileID: 4518269238913542738}
   - component: {fileID: 4518269238913542739}
   - component: {fileID: 178859261}
-  - component: {fileID: 1413807270}
   - component: {fileID: 1413807269}
+  - component: {fileID: 1413807275}
   m_Layer: 0
   m_Name: LawnBoy
   m_TagString: Player
@@ -144,41 +144,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4518269238913542741}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6fd20ff562bec964bb7f52a04ff373e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   movePoint: {fileID: 1369101682}
   animator: {fileID: 4518269238913542739}
-  collisionObj: {fileID: 0}
-  mower: {fileID: 0}
-  box: {fileID: 0}
+  interactiveObj: {fileID: 0}
   lookDirection: {x: 0, y: 0}
   moveSpeed: 4
   currentState: 0
   currentType: 0
---- !u!50 &1413807270
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4518269238913542741}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 1
-  m_UseAutoMass: 0
-  m_Mass: 0.0001
-  m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
+  canMove: 0
 --- !u!61 &1413807269
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -205,3 +183,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1413807275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4518269238913542741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e0928fc19ed55641bf116709b3d2087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToMove: 0.3
+  animator: {fileID: 4518269238913542739}
+  interactiveObj: {fileID: 0}

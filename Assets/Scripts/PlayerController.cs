@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     public Interactable interactiveObj;
 
-    public Vector2 lookDirection;
+    public Vector2 lookDirection;   
 
     public float moveSpeed;
 
@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     Vector2 input;
     float playerViewRange = 1f;
     public RaycastHit2D frontData;
+    public bool canMove;
 
     #endregion
 
@@ -44,6 +45,8 @@ public class PlayerController : MonoBehaviour
     {
         if (currentState == PlayerState.move)
         {
+            canMove = MoveCheck();
+
             if (Input.GetButtonDown("Action"))
             {
                 Interact(1, currentState, currentType);
@@ -55,7 +58,7 @@ public class PlayerController : MonoBehaviour
                 //Interact(2, currentState, currentType);
             }
 
-            Debug.Log(frontData.collider.gameObject);
+            //Debug.Log(frontData.collider.gameObject);
 
             //This logic deselects the interactive object if the player is no longer facing it.
             if (interactiveObj != null)
@@ -71,12 +74,17 @@ public class PlayerController : MonoBehaviour
             else{}              //Do nothing
 
 
-            GetMove();
+            GetMove(MoveCheck());
         }
+    }
+    
+    void FixedUpdate()
+    {
+        
     }
     #endregion
 
-    void GetMove()
+    void GetMove(bool canMove)
     //Moves the player and sets proper animations
     {
         //Move player
@@ -99,7 +107,7 @@ public class PlayerController : MonoBehaviour
             }
 
             //If no collision, move the player.
-            if (CanMove().Item1)
+            if (canMove)
             {
                 Vector3 moveVector = new Vector3(input.x, input.y, 0f);
                 movePoint.position += moveVector;
@@ -123,26 +131,38 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public (bool, RaycastHit2D) CanMove()
+    public bool MoveCheck()
     // Checks if there is a collision object in the direction of desired movement.
     {
-        if (Vector3.Distance(transform.position, movePoint.position) <= 0.0001f)
+        //Check in front.
+        
+
+        if (Vector3.Distance(transform.position, movePoint.position) <= 0.0001f)            //Player is not moving.
         {
-            RaycastHit2D frontData = Physics2D.Raycast(transform.position, transform.TransformDirection(input), playerViewRange);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(input), playerViewRange);
             Debug.DrawRay(transform.position, playerViewRange * transform.TransformDirection(lookDirection), Color.cyan, 0.25f);
 
-            if (frontData)
+            if (hit)
             {
-                if (frontData.transform.gameObject.layer == 6 || frontData.transform.gameObject.layer == 3) //Impassable or Interactable Objects
-                { return (false, frontData); }           //Can't move.
+                Debug.Log(hit.transform.gameObject.layer);
+                if (hit.transform.gameObject.layer == 6 || hit.transform.gameObject.layer == 3) //Impassable or Interactable Objects
+                { return 
+                    false;          //Can't move.
+                }           
                 else
-                { return (true, frontData); }            //Can move.
+                { 
+                    return true;    //Can move.
+                }            
             }
-
-            return (true, frontData);                    //No hit, can move.
+            else
+            {
+                return true;                    //No hit, can move.
+            }
         }
-
-        return (false, frontData);                       //Too early to move.
+        else                                                                                //Player is moving.
+        {
+            return false;                       //Too early to move.
+        }
 
     }
 
@@ -202,7 +222,7 @@ public class PlayerController : MonoBehaviour
 
     // IEnumerator ActionCo()  // Performs an action (CURRENTLY JUST MOWER THUMBS UP)
     // {
-    //     yield return new WaitUntil(() => CanMove());
+    //     yield return new WaitUntil(() => MoveCheck());
     //     animator.SetBool("Action", true);
     //     currentState = PlayerState.Action;
     //     yield return null;

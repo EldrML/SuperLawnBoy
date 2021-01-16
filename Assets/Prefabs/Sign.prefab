@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6651006929187768044}
   - component: {fileID: 7936926137705282179}
   - component: {fileID: 8728955968941923316}
+  - component: {fileID: 126422982}
   m_Layer: 3
   m_Name: Sign
   m_TagString: Sign
@@ -135,3 +136,19 @@ MonoBehaviour:
   dialogBox: {fileID: 0}
   dialogText: {fileID: 0}
   dialog: he needs his bike
+--- !u!114 &126422982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7448866607926411604}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5e1015da751fd044a83fe9a78de8e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 1
+  inRange: 0
+  isFocus: 0
+  player: {fileID: 0}

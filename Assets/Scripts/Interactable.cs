@@ -3,32 +3,29 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     public float radius = 1f;
-    public bool inRange = false;
+    //public bool inRange = false;
     public bool isFocus = false;
+    public Vector2 lookDir;
     //int buttonNum;
     public Transform player;
     //public PlayerController player;
-    // Start is called before the first frame update
-    // void Start()
-    // {
 
-    // }
 
     public virtual void Interact(int buttonNum, int state)
     {
-        //This method to be overwritten.
+        //This method to be overwritten/appended.
         //-----
 
-        float distance = Vector2.Distance(player.position, transform.position);
-        if (distance <= radius)
-        {
-            inRange = true;
-        }
+        // float distance = Vector2.Distance(player.position, transform.position);
+        // if (distance <= radius)
+        // {
+        //     inRange = true;
+        // }
 
-        if(inRange)
-        {
-            Debug.Log("Interacting with " + transform.name);
-        }
+        // if(inRange)
+        // {
+        //     Debug.Log("Interacting with " + transform.name);
+        // }
         
     }
 
@@ -43,25 +40,31 @@ public class Interactable : MonoBehaviour
     {
         if(player != null && isFocus)
         {
-            float distance = Vector2.Distance(player.position, transform.position);
-            if(distance <= radius)
+            if(transform.position - player.transform.position != new Vector3(lookDir.x, lookDir.y, 0f))
             {
-                //inRange = true;
-            }
-            else
-            {
-                inRange = false;
+                Debug.Log("Unfocus now.");
                 isFocus = false;
             }
+
+            // float distance = Vector2.Distance(player.position, transform.position);
+            // if(distance <= radius)
+            // {
+            //     inRange = true;
+            // }
+            // else
+            // {
+            //     inRange = false;
+            //     isFocus = false;
+            // }
         }
     }
 
-    void OnTriggerEnter2D(Collider2D otherObj)
-    {
-        if (otherObj.CompareTag("Player"))
-        {
-            inRange = true;
-        }
+    // void OnTriggerEnter2D(Collider2D otherObj)
+    // {
+    //     if (otherObj.CompareTag("Player"))
+    //     {
+    //         inRange = true;
+    //     }
         
-    }
+    // }
 }

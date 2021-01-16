@@ -21,7 +21,8 @@ public class Sign : Interactable
     {
         base.Interact(buttonNum, state);
         
-        if (inRange && isFocus)
+        //if (inRange && isFocus)
+        if (isFocus)
         {
             if (buttonNum == 1 && state == 1)
             {
@@ -46,9 +47,10 @@ public class Sign : Interactable
     public override void Update()
     {
         base.Update();
-        if (dialogBox.activeInHierarchy && !inRange && !isFocus)
+        if (!isFocus)
         {
             dialogBox.SetActive(false);
+            player = null;
         }
     }
 }
