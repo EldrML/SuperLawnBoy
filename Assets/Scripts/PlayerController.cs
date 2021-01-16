@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     Vector2 input;
     float playerViewRange = 1f;
     public RaycastHit2D frontData;
+
     #endregion
 
     #region Main Logic Loop
@@ -43,15 +44,32 @@ public class PlayerController : MonoBehaviour
     {
         if (currentState == PlayerState.move)
         {
-            if (Input.GetButtonDown("Action2"))
+            if (Input.GetButtonDown("Action"))
             {
                 Interact(1, currentState, currentType);
             }
 
-            // else if (Input.GetButtonDown("Action")) 
-            // {
-            //     Interact(2, currentState, currentType);
-            // }
+            else if (Input.GetButtonDown("Action2"))
+            {
+                Debug.Log("Using second action button.");
+                //Interact(2, currentState, currentType);
+            }
+
+            Debug.Log(frontData.collider.gameObject);
+
+            //This logic deselects the interactive object if the player is no longer facing it.
+            if (interactiveObj != null)
+            {
+                //Debug.Log(frontData.collider.gameObject);
+                // if (frontData.collider.gameObject == interactiveObj)
+                // {
+                //     interactiveObj.isFocus = false;
+                //     interactiveObj = null;
+                // }
+                // else{}
+            }
+            else{}              //Do nothing
+
 
             GetMove();
         }
@@ -81,47 +99,50 @@ public class PlayerController : MonoBehaviour
             }
 
             //If no collision, move the player.
-            if (CanMove())
+            if (CanMove().Item1)
             {
                 Vector3 moveVector = new Vector3(input.x, input.y, 0f);
                 movePoint.position += moveVector;
             }
 
-            // -- Animation/Look Direction Control -- //
+            // -- Look Direction Control -- //
             if (input != Vector2.zero)
             {
                 lookDirection = input;                      //Direction of RayCast for collision checking
+            }
+
+            //Animation Control
+            if (input != Vector2.zero)
+            {
                 animator.SetFloat("Horizontal", input.x);
                 animator.SetFloat("Vertical", input.y);
                 animator.SetBool("Moving", true);
             }
             else
-            {
-                animator.SetBool("Moving", false);
-            }
+            { animator.SetBool("Moving", false); }
         }
     }
 
-    public bool CanMove()
+    public (bool, RaycastHit2D) CanMove()
     // Checks if there is a collision object in the direction of desired movement.
     {
         if (Vector3.Distance(transform.position, movePoint.position) <= 0.0001f)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(input), playerViewRange);
+            RaycastHit2D frontData = Physics2D.Raycast(transform.position, transform.TransformDirection(input), playerViewRange);
             Debug.DrawRay(transform.position, playerViewRange * transform.TransformDirection(lookDirection), Color.cyan, 0.25f);
 
-            if (hit)
+            if (frontData)
             {
-                if (hit.transform.gameObject.layer == 6 || hit.transform.gameObject.layer == 3) //Impassable or Interactable Objects
-                { return false; }           //Can't move.
+                if (frontData.transform.gameObject.layer == 6 || frontData.transform.gameObject.layer == 3) //Impassable or Interactable Objects
+                { return (false, frontData); }           //Can't move.
                 else
-                { return true; }            //Can move.
+                { return (true, frontData); }            //Can move.
             }
 
-            return true;                    //No hit, can move.
+            return (true, frontData);                    //No hit, can move.
         }
 
-        return false;                       //Too early to move.
+        return (false, frontData);                       //Too early to move.
 
     }
 
@@ -131,32 +152,37 @@ public class PlayerController : MonoBehaviour
         //Cast a ray one tile in front of the player.
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(lookDirection), playerViewRange);
         Debug.DrawRay(transform.position, playerViewRange * transform.TransformDirection(lookDirection), Color.red, 0.25f);
-
+        Debug.Log(hit.transform.name);
         if (hit) //If the ray hits an object
         {
-            if (interactiveObj != null) //Interactable has been set at least once.
-            {
+            interactiveObj = hit.collider.GetComponent<Interactable>();     //Make this the interactive object.
+            interactiveObj.player = transform;                              //
+            interactiveObj.isFocus = true;
 
-                if (hit.collider.transform.name != interactiveObj.transform.name)   //Different Interactable.
-                {
-                    interactiveObj.isFocus = false;    
-                    interactiveObj.player = null;
-                    interactiveObj = hit.collider.GetComponent<Interactable>();
-                    interactiveObj.isFocus = true;
-                    interactiveObj.player = transform;
-                    //Debug.Log("SAME OBJECT");
-                }
-                else                                                                //Same Interactable
-                {
-                    //interactiveObj = hit.collider.GetComponent<Interactable>();
-                }
-            }
-            else //Set interactable for the first, if possible.
-            {
-                interactiveObj = hit.collider.GetComponent<Interactable>();     //Make this the interactive object.
-                interactiveObj.player = transform;                              //
-                interactiveObj.isFocus = true;
-            }
+
+            // if (interactiveObj != null) //Interactable has been set at least once.
+            // {
+
+            //     if (hit.collider.transform.name != interactiveObj.transform.name)   //Different Interactable.
+            //     {
+            //         interactiveObj.isFocus = false;
+            //         interactiveObj.player = null;
+            //         interactiveObj = hit.collider.GetComponent<Interactable>();
+            //         interactiveObj.isFocus = true;
+            //         interactiveObj.player = transform;
+            //         //Debug.Log("SAME OBJECT");
+            //     }
+            //     else                                                                //Same Interactable
+            //     {
+            //         //interactiveObj = hit.collider.GetComponent<Interactable>();
+            //     }
+            // }
+            // else //Set interactable for the first, if possible.
+            // {
+            //     interactiveObj = hit.collider.GetComponent<Interactable>();     //Make this the interactive object.
+            //     interactiveObj.player = transform;                              //
+            //     interactiveObj.isFocus = true;
+            // }
 
             //Make that object the focused interactive.
 
@@ -174,31 +200,31 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator ActionCo()  // Performs an action (CURRENTLY JUST MOWER THUMBS UP)
-    {
-        yield return new WaitUntil(() => CanMove());
-        animator.SetBool("Action", true);
-        currentState = PlayerState.Action;
-        yield return null;
-        animator.SetBool("Action", false);
-        yield return new WaitForSeconds(1f);
-        currentState = PlayerState.move;
-    }
+    // IEnumerator ActionCo()  // Performs an action (CURRENTLY JUST MOWER THUMBS UP)
+    // {
+    //     yield return new WaitUntil(() => CanMove());
+    //     animator.SetBool("Action", true);
+    //     currentState = PlayerState.Action;
+    //     yield return null;
+    //     animator.SetBool("Action", false);
+    //     yield return new WaitForSeconds(1f);
+    //     currentState = PlayerState.move;
+    // }
 
-    #region Extra Functions
-    void AnimatorControl(Vector2 input) //May be useful later for more animation controlling...
-    {
-        if (input != Vector2.zero)
-        {
-            animator.SetFloat("Horizontal", input.x);
-            animator.SetFloat("Vertical", input.y);
-            animator.SetBool("Moving", true);
-        }
-        else
-        {
-            animator.SetBool("Moving", false);
-        }
+    // #region Extra Functions
+    // void AnimatorControl(Vector2 input) //May be useful later for more animation controlling...
+    // {
+    //     if (input != Vector2.zero)
+    //     {
+    //         animator.SetFloat("Horizontal", input.x);
+    //         animator.SetFloat("Vertical", input.y);
+    //         animator.SetBool("Moving", true);
+    //     }
+    //     else
+    //     {
+    //         animator.SetBool("Moving", false);
+    //     }
 
-    }
-    #endregion
+    // }
+    // #endregion
 }

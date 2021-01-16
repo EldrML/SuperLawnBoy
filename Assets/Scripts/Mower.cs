@@ -17,44 +17,44 @@ public class Mower : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (this.isActiveAndEnabled)
-        {
-            mowerAnimator.SetFloat("MowerHorDir", mowerDirection.x);
-            mowerAnimator.SetFloat("MowerVerDir", mowerDirection.y);
-        }
-    }
+    // void Update()
+    // {
+    //     if (this.isActiveAndEnabled)
+    //     {
+    //         mowerAnimator.SetFloat("MowerHorDir", mowerDirection.x);
+    //         mowerAnimator.SetFloat("MowerVerDir", mowerDirection.y);
+    //     }
+    // }
 
-    public void PickUpAndDropMower()
-    {
-        if (player.CanMove())
-        {
-            //Pick Up Mower logic.
-            if (player.frontData)
-            {
-                if (player.currentType == PlayerController.PlayerType.nm &&
-                    player.frontData.collider.tag == "Mower")
-                {
-                    this.gameObject.SetActive(false);
-                    player.currentType = PlayerController.PlayerType.wm;
-                    player.animator.SetBool("HasMower", true);
-                }
-                else { }
-            }
+    // public void PickUpAndDropMower()
+    // {
+    //     if (player.CanMove())
+    //     {
+    //         //Pick Up Mower logic.
+    //         if (player.frontData)
+    //         {
+    //             if (player.currentType == PlayerController.PlayerType.nm &&
+    //                 player.frontData.collider.tag == "Mower")
+    //             {
+    //                 this.gameObject.SetActive(false);
+    //                 player.currentType = PlayerController.PlayerType.wm;
+    //                 player.animator.SetBool("HasMower", true);
+    //             }
+    //             else { }
+    //         }
 
-            //Drop Mower logic.
-            if (player.currentType == PlayerController.PlayerType.wm && 
-                !player.frontData)
-            {
-                this.transform.position = player.transform.TransformPoint(player.lookDirection);
-                this.mowerDirection = player.lookDirection;
-                this.gameObject.SetActive(true);
-                player.currentType = PlayerController.PlayerType.nm;
-                player.animator.SetBool("HasMower", false);
-            }
-            else { }
+    //         //Drop Mower logic.
+    //         if (player.currentType == PlayerController.PlayerType.wm && 
+    //             !player.frontData)
+    //         {
+    //             this.transform.position = player.transform.TransformPoint(player.lookDirection);
+    //             this.mowerDirection = player.lookDirection;
+    //             this.gameObject.SetActive(true);
+    //             player.currentType = PlayerController.PlayerType.nm;
+    //             player.animator.SetBool("HasMower", false);
+    //         }
+    //         else { }
 
-        }
-    }
+    //     }
+    // }
 }
