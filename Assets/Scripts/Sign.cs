@@ -3,54 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Sign : Interactable
+public class Sign : InteractableTalk
 {
-    //public PlayerController player;
-    public GameObject dialogBox;
-    public Text dialogText;
     public string dialog;
-    //public bool playerInRange;
+    private DialogueManager dMan;
 
     void Start()
     {
-        // TODO : Improve the method of assigning the player controller. Needs to scale to SEVERAL objects.
-        //player = (PlayerController)FindObjectOfType(typeof(PlayerController));
+        dMan = FindObjectOfType<DialogueManager>();
+    }
+    public override void InteractEmpty(bool frontHasObject)
+    {
+        ReadSign();
     }
 
-    public override void Interact(int buttonNum, int state)
+    public override void InteractCarry(bool frontHasObject)
     {
-        base.Interact(buttonNum, state);
-        
-        //if (inRange && isFocus)
-        if (isFocus)
-        {
-            if (buttonNum == 1 && state == 1)
-            {
-                ReadSign();
-            }
-        }
+        ReadSign();
     }
 
     void ReadSign()
     {
-        if (dialogBox.activeInHierarchy)
+        dMan.ShowBox(dialog);
+    }
+    void Update()
+    {
+        //base.Update();
+        if (player != null)
         {
-            dialogBox.SetActive(false);
-        }
-        else
-        {
-            dialogBox.SetActive(true);
-            dialogText.text = dialog;
+            if (this.transform.position - this.player.transform.position != new Vector3(lookDir.x, lookDir.y, 0f))
+            {
+                dMan.dBox.SetActive(false);
+                player = null;
+
+            }
         }
     }
 
-    public override void Update()
-    {
-        base.Update();
-        if (!isFocus)
-        {
-            dialogBox.SetActive(false);
-            player = null;
-        }
-    }
 }

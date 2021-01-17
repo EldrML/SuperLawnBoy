@@ -3,29 +3,55 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     public float radius = 1f;
-    //public bool inRange = false;
-    public bool isFocus = false;
     public Vector2 lookDir;
-    //int buttonNum;
+    public PlayerMovement playerScript;
     public Transform player;
-    //public PlayerController player;
+    public float playerViewRange;
 
+    public void Interact(int buttonNum, int state, int type, bool frontIsClear)
+    {
+        Debug.Log("" + buttonNum + state + type + frontIsClear);
 
-    public virtual void Interact(int buttonNum, int state)
+        if(buttonNum == 1)  //First button
+        {
+            Debug.Log("Interacting with " + transform.name);
+            if(type == 0)       //No Mower
+            {
+                InteractEmpty(frontIsClear);
+            }
+            else if(type == 1)  //Mower State
+            {
+
+            }
+            else if(type == 2)  //Box Carry State
+            {
+                InteractCarry(frontIsClear);
+            }
+            else
+            {
+
+            }
+        }
+        
+    }
+
+    public virtual void InteractEmpty(bool frontIsClear)
     {
         //This method to be overwritten/appended.
         //-----
+        {
+            Debug.Log("Interacting with " + transform.name + " while not carrying anything.");
+        }
+        
+    }
 
-        // float distance = Vector2.Distance(player.position, transform.position);
-        // if (distance <= radius)
-        // {
-        //     inRange = true;
-        // }
-
-        // if(inRange)
-        // {
-        //     Debug.Log("Interacting with " + transform.name);
-        // }
+    public virtual void InteractCarry(bool frontIsClear)
+    {
+        //This method to be overwritten/appended.
+        //-----
+        {
+            Debug.Log("Interacting with " + transform.name + " while carrying something.");
+        }
         
     }
 
@@ -35,36 +61,18 @@ public class Interactable : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, radius);
     }
 
-    // Update is called once per frame
-    public virtual void Update()
-    {
-        if(player != null && isFocus)
-        {
-            if(transform.position - player.transform.position != new Vector3(lookDir.x, lookDir.y, 0f))
-            {
-                Debug.Log("Unfocus now.");
-                isFocus = false;
-            }
-
-            // float distance = Vector2.Distance(player.position, transform.position);
-            // if(distance <= radius)
-            // {
-            //     inRange = true;
-            // }
-            // else
-            // {
-            //     inRange = false;
-            //     isFocus = false;
-            // }
-        }
-    }
-
-    // void OnTriggerEnter2D(Collider2D otherObj)
+    // // Update is called once per frame
+    // public virtual void Update()
     // {
-    //     if (otherObj.CompareTag("Player"))
+    //     if (player != null)
     //     {
-    //         inRange = true;
+    //         // if (this.transform.position - this.player.transform.position != new Vector3(lookDir.x, lookDir.y, 0f))
+    //         // {
+    //         //     Debug.Log("No Longer In Range");
+    //         //     player = null;
+    //         //     Debug.Log("Note, if this is triggering, make sure the object is exactly on the grid.");
+    //         //     Debug.Log("There is currently an issue with the if statement above. Might be able to fix with rounding?");
+    //         // }
     //     }
-        
     // }
 }

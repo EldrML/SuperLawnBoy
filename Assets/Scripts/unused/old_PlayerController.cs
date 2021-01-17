@@ -177,7 +177,7 @@ public class PlayerController : MonoBehaviour
         {
             interactiveObj = hit.collider.GetComponent<Interactable>();     //Make this the interactive object.
             interactiveObj.player = transform;                              //
-            interactiveObj.isFocus = true;
+            //interactiveObj.isFocus = true;
 
 
             // if (interactiveObj != null) //Interactable has been set at least once.
@@ -209,14 +209,14 @@ public class PlayerController : MonoBehaviour
 
 
 
-            if (currentType == PlayerType.nm)   //Player does not have mower.
-            {
-                interactiveObj.Interact(buttonNum, 1);
-            }
-            else                                //Player has mower.
-            {
-                interactiveObj.Interact(buttonNum, 2);
-            }
+            // if (currentType == PlayerType.nm)   //Player does not have mower.
+            // {
+            //     interactiveObj.Interact(buttonNum, 1);
+            // }
+            // else                                //Player has mower.
+            // {
+            //     interactiveObj.Interact(buttonNum, 2);
+            // }
         }
     }
 
