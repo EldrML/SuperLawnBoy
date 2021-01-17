@@ -6,12 +6,12 @@ public class PlayerMovement : MonoBehaviour
 {
     #region Variables
 
-    bool isMoving, pathBlocked;
+    [SerializeField] bool isMoving, pathBlocked;
 
     public float timeToMove = 0.25f;
-    private float playerViewRange = 1f;
+    private int playerViewRange = 1;
 
-    private Vector2 input, lookDirection;
+    [SerializeField] private Vector2 input, lookDirection;
 
     private Vector3 origPos, targetPos;
 
@@ -30,24 +30,15 @@ public class PlayerMovement : MonoBehaviour
     public PlayerState state;
     public PlayerType type;
 
-    public Interactable talkObj, carryObj;
+    [SerializeField] InteractableCarry heldObject;
 
     #endregion
 
-    void Start()
-    // Start is called before the first frame update
-    {
-        lookDirection = Vector2.down;       //Raycast direction,
-        state = PlayerState.move;
-        type = PlayerType.nm;
-        Debug.Log("Is there jittery movemet in this controller to be adjusted?");
-    }
-
-    // Update is called once per frame
     void Update()
+    //Core Logic Loop for player.
     {
-        if (state == PlayerState.move)
-        {
+        // if (state == PlayerState.move)
+        // {
             //Player can't move unless they have hit the grid properly.
             if (isMoving) { return; }
 
@@ -56,20 +47,26 @@ public class PlayerMovement : MonoBehaviour
 
 
             if (Input.GetButtonDown("Action"))
+            //First action button. Reads signs, dashes, throws
             {
-                //Debug.Log("Using first action button.");
-                Interact(1, state, type);
+                Debug.Log("Using first action button.");
+                //Interact(1, state, type);
             }
             else if (Input.GetButtonDown("Action2"))
+            //Check in front of player.
             {
-                Debug.Log("Using second action button.");
-                //Interact(2, currentState, currentType);
+                //Debug.Log("Using second action button.");
+                //Debug.Log(CheckInFront());
+                //Debug.Log(CheckInFront().Item1);
+                Interact(2, state, type);
             }
 
             UpdateAnimations(input);    //Update player animations.
-        }
+        //}
     }
 
+//---------------------------------------------------------------------------------
+    #region Move Logic
     Vector2 GetMoveInput()
     //Simply obtains the 4-Dir move input from the player.
     {
@@ -88,34 +85,7 @@ public class PlayerMovement : MonoBehaviour
         return input;
     }
 
-    public (bool, RaycastHit2D) CheckInFront()
-    //Checks if there is a collision object in the direction of desired movement.
-    //If TRUE: There is an object in front of the player.
-    //If FALSE:There is NOT an object in front of the player.
-    {
-        //Send Raycast in direction that player is facing.
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(input), playerViewRange);
-        Debug.DrawRay(transform.position, playerViewRange * transform.TransformDirection(lookDirection), Color.cyan, 0.25f);
 
-        if (hit)
-        {
-            if (hit.transform.gameObject.layer == 6 ||  //Impassable or
-                hit.transform.gameObject.layer == 3)    //Interactable Objects
-            {
-                Debug.Log("Good");
-                return (true, hit);    //Object in front.
-            }
-            else                                        //Other layers like grass etc.
-            {
-                return (false, hit);   //No object in front.
-            }
-        }
-        else
-        {
-            return (false, new RaycastHit2D());       //No object in front.
-        }
-
-    }
 
     void GetMoveAndLookDir(Vector2 input)
     //Controls the player's directional movement.
@@ -124,97 +94,14 @@ public class PlayerMovement : MonoBehaviour
         if (input != Vector2.zero)
         {
             lookDirection = input;                      //Change the Look Direction first.
-            if (talkObj != null)
-            {
-                talkObj.lookDir = lookDirection;
-            }
-            if (carryObj != null)
-            {
-                carryObj.lookDir = lookDirection;
-            }
 
-            pathBlocked = CheckInFront().Item1;         //Check if there is a collision in the new look direction.
+            pathBlocked = CheckInFront(playerViewRange).Item1;         //Check if there is a collision in the new look direction.
 
             if (!pathBlocked) //No object in front of player.
             {
                 StartCoroutine(MovePlayer(new Vector3(input.x, input.y, 0f)));
             }
         }
-    }
-
-    void Interact(int buttonNum, PlayerState state, PlayerType type)
-    //Interacts with things in front of the player. (NPCs, mowers, boxes, etc.)
-    {
-        //Cast a ray one tile in front of the player.
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(lookDirection), playerViewRange);
-        Debug.DrawRay(transform.position, playerViewRange * transform.TransformDirection(lookDirection), Color.red, 0.25f);
-
-        if (hit) //If the ray hits an object
-        {
-            //Debug.Log(hit.transform.name);
-            if(hit.collider.gameObject.HasComponent<InteractableTalk>())
-            {
-                talkObj = hit.collider.GetComponent<Interactable>();    //Make this the interactive object.
-                talkObj.playerScript = this;
-                talkObj.player = transform;                                    // c
-                talkObj.lookDir = lookDirection;
-            }
-            else if(hit.collider.gameObject.HasComponent<InteractableCarry>())
-            {
-                if(carryObj == null)    //Can only carry one object.
-                {
-                    carryObj = hit.collider.GetComponent<Interactable>();    //Make this the interactive object.
-                    carryObj.playerScript = this;
-                    carryObj.player = transform;                                    // c
-                    carryObj.lookDir = lookDirection;
-                }
-            }
-            
-            talkObj.Interact(buttonNum, (int)state, (int)type, CheckInFront().Item1);
-            
-            
-
-            // if (type == PlayerType.nm)   //Player does not have mower.
-            // {
-            //     interactiveObj.Interact(buttonNum, (int)state, (int)type);
-            // }
-            // else                                //Player has mower.
-            // {
-            //     interactiveObj.Interact(buttonNum, 2);
-            // }
-        }
-        else
-        {
-            talkObj = null;
-        }
-        // else if(interactiveObj != null) //If the player has an interactable object already.
-        // {
-        //     interactiveObj.Interact(buttonNum, (int)state, (int)type, CheckInFront().Item1);
-        // }
-
-        // if(talkObj != null)
-        // {
-            
-        // }
-        if(carryObj != null)
-        {
-            carryObj.Interact(buttonNum, (int)state, (int)type, CheckInFront().Item1);
-        }
-        
-    }
-
-    void UpdateAnimations(Vector2 input)
-    //Updates the player's animations based on input, state, and other conditions.
-    //Currently only input is implemented.
-    {
-        if (input != Vector2.zero)
-        {
-            animator.SetFloat("Horizontal", input.x);
-            animator.SetFloat("Vertical", input.y);
-            animator.SetBool("Moving", true);
-        }
-        else
-        { animator.SetBool("Moving", false); }
     }
 
     private IEnumerator MovePlayer(Vector3 direction)
@@ -237,6 +124,88 @@ public class PlayerMovement : MonoBehaviour
         transform.position = targetPos;
 
         isMoving = false;
+    }
+    #endregion
+//---------------------------------------------------------------------------------
+
+    void UpdateAnimations(Vector2 input)
+    //Updates the player's animations based on input, state, and other conditions.
+    //Currently only input is implemented.
+    {
+        if (input != Vector2.zero)
+        {
+            animator.SetFloat("Horizontal", input.x);
+            animator.SetFloat("Vertical", input.y);
+            animator.SetBool("Moving", true);
+        }
+        else
+        { animator.SetBool("Moving", false); }
+    }
+
+//---------------------------------------------------------------------------------
+
+    public (bool, RaycastHit2D) CheckInFront(int playerViewRange)
+    //Checks if there is a collision object in the direction of desired movement.
+    //If TRUE: There is an object in front of the player.
+    //If FALSE:There is NOT an object in front of the player.
+    {
+        //Send Raycast in direction that player is facing.
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(lookDirection), playerViewRange);
+        Debug.DrawRay(transform.position, playerViewRange * transform.TransformDirection(lookDirection), Color.cyan, 0.25f);
+
+        if (hit)
+        {
+            if (hit.transform.gameObject.layer == 6 ||  //Impassable or
+                hit.transform.gameObject.layer == 3)    //Interactable Objects
+            {
+                //Debug.Log("Good");
+                return (true, hit);    //Object in front.
+            }
+            else                                        //Other layers like grass etc.
+            {
+                return (false, hit);   //No object in front.
+            }
+        }
+        else
+        {
+            return (false, new RaycastHit2D());       //No object in front.
+        }
+
+    }
+
+    void Interact(int buttonNum, PlayerState state, PlayerType type)
+    //Interacts with things in front of the player. (NPCs, mowers, boxes, etc.)
+    {
+        //Cast a ray one tile in front of the player.
+        (bool itemInFront, RaycastHit2D hit) = CheckInFront(playerViewRange); //Physics2D.Raycast(transform.position, transform.TransformDirection(lookDirection), playerViewRange);
+        //Debug.DrawRay(transform.position, playerViewRange * transform.TransformDirection(lookDirection), Color.red, 0.25f);
+
+        if (itemInFront)    //Ray hits an object.
+        {
+            if (hit.transform.gameObject.GetComponent<InteractableCarry>() && type == PlayerType.nm)
+            {
+                heldObject = hit.transform.gameObject.GetComponent<InteractableCarry>();
+                type = PlayerType.carry;
+                animator.SetBool("IsCarrying", true);
+                SLBEvents.current.PlayerPickUpCarryable(this.gameObject);
+            }
+            else if(hit.transform.gameObject.GetComponent<InteractableTalk>())
+            {
+                Debug.Log("Send talk event for " + hit.transform.name);
+            }
+        }
+        else                //Ray does not hit an object.
+        {
+            if(type == PlayerType.wm)
+            {
+                Debug.Log("Put down mower in front of player.");
+            }
+            if(type == PlayerType.carry)
+            {
+                Debug.Log("Put down carryableObject in front of player.");
+            }
+        }
+
     }
 
 }

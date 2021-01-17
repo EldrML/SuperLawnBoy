@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Mower : MonoBehaviour
 {
-    public PlayerController player;
+    public PlayerMovement player;
     public Vector2 mowerDirection;
     public Animator mowerAnimator;
     // Start is called before the first frame update
@@ -13,7 +13,7 @@ public class Mower : MonoBehaviour
     {
         mowerDirection = Vector2.left;
         //mowerPosition = this.transform.position;
-        player = (PlayerController)FindObjectOfType(typeof(PlayerController));
+        player = (PlayerMovement)FindObjectOfType(typeof(PlayerMovement));
     }
 
     // Update is called once per frame
