@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    public float radius = 1f;
+    [SerializeField] float gizmoRadius = 0.75f;
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, radius);
+        Gizmos.DrawWireSphere(transform.position, gizmoRadius);
     }
 
 }

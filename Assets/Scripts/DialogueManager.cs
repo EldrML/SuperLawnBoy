@@ -18,6 +18,7 @@ public class DialogueManager : MonoBehaviour
     public void ShowBox(string dialog)
     //Makes the dialog box visible and changes the text inside.
     {
+        //dBox.SetActive(true);
         dBox.SetActive(!dBox.activeInHierarchy);
         dText.text = dialog;
     }

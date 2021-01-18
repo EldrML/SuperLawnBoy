@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7651b5173999d8f4e8f1bd85260ab842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  gizmoRadius: 0.5
   grassAnimator: {fileID: 3092350168973973042}
   sprite: {fileID: 0}
 --- !u!95 &3092350168973973042

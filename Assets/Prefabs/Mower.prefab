@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4146044019002562853}
   - component: {fileID: 4146044019002562851}
   - component: {fileID: 1905547893}
-  m_Layer: 8
+  m_Layer: 3
   m_Name: Mower
   m_TagString: Mower
   m_Icon: {fileID: 0}
@@ -143,6 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c77236be4a649947b3276d46c62245c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  gizmoRadius: 0.75
+  initialParent: {fileID: 0}
+  carryState: 0
   mowerDirection: {x: 0, y: 0}
   mowerAnimator: {fileID: 4146044019002562852}

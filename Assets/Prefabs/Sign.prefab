@@ -128,10 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e1f3bfd38ab91f42876f0c4e30dcad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1
-  isFocus: 0
-  lookDir: {x: 0, y: 0}
+  gizmoRadius: 0.5
+  dialog: beeg bike
   player: {fileID: 0}
-  dialogBox: {fileID: 0}
-  dialogText: {fileID: 0}
-  dialog: he needs his bike
+  lookDirection: {x: 0, y: 0}
