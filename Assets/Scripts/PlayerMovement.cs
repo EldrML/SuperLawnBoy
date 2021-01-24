@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] bool isMoving, pathBlocked, isTalking = false, waitForInteract = false;
 
     public float timeToMove = 0.25f;
-    [SerializeField] private int playerViewRange = 1, buttonNum = 0;
+    [SerializeField] private int playerViewRange = 1, buttonNum = 0, maxThrow = 2;
 
     [SerializeField] private Vector2 input, lookDirection;
 
@@ -242,28 +242,22 @@ public class PlayerMovement : MonoBehaviour
         //Box throwing logic
         if (heldObject != null && heldObject.tag == "Box")
         {
-            bool throwCheckFar = CheckInFront(2*playerViewRange).Item1;     //True if object 2 tiles ahead of player.
-            
-            if (!throwCheckFar)         //If there is no object within 2 tiles of player.
+            for(int ii = maxThrow; ii >= 1; ii--)
             {
-                Debug.Log("2 tile throw.");
-            }
-            else
-            {
-                bool throwCheckClose = CheckInFront(playerViewRange).Item1; //True if object 1 tiles ahead of player.
+                bool throwCheck = CheckInFront(ii * playerViewRange).Item1;     //checks if The ii-th tile is clear
+                if (!throwCheck)
+                {
+                    Debug.Log(ii + " tile throw.");
+                    SLBEvents.current.PlayerThrowsCarryable(this.gameObject, ii*lookDirection, heldObject.GetInstanceID());
+                    heldObject = null;
 
-                if (!throwCheckClose)   //If there is no object in front of the player.
-                {
-                    Debug.Log("1 tile throw.");
+                    //Update player animations.
+                    type = PlayerType.nm;
+                    animator.SetBool("IsCarrying", false);
+
+                    return;
                 }
-                else
-                {
-                    Debug.Log("No throw.");
-                    //Don't do anything with the box.
-                }
-                
             }
-            
         }
 
     }

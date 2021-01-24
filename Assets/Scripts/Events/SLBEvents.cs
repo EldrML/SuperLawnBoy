@@ -28,6 +28,13 @@ public class SLBEvents : MonoBehaviour
     }
 
 
+    public event Action<GameObject, Vector2, int> onPlayerThrowCarryable;
+    public void PlayerThrowsCarryable(GameObject gameObject, Vector2 lookDirection, int id)
+    { 
+        onPlayerThrowCarryable?.Invoke(gameObject, lookDirection, id);
+    }
+
+
     public event Action<int> onPlayerReadInteractable;
     public void PlayerReadInteractable(int id)
     { 
