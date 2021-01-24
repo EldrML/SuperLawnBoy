@@ -91,6 +91,7 @@ public class PlayerMovement : MonoBehaviour
         else
         { animator.SetBool("Moving", false); }
     }
+
     #endregion
 
 
@@ -159,6 +160,7 @@ public class PlayerMovement : MonoBehaviour
     #region Interaction Logic
 
     int InteractInput()
+    //Gets the input from the two action buttons.
     {
         if (Input.GetButtonDown("Action"))
         //First action button. Reads signs, dashes, throws
@@ -235,6 +237,33 @@ public class PlayerMovement : MonoBehaviour
                 isTalking = !isTalking;
                 SLBEvents.current.PlayerReadInteractable(hit.transform.gameObject.GetInstanceID());
             }
+        }
+        
+        //Box throwing logic
+        if (heldObject != null && heldObject.tag == "Box")
+        {
+            bool throwCheckFar = CheckInFront(2*playerViewRange).Item1;     //True if object 2 tiles ahead of player.
+            
+            if (!throwCheckFar)         //If there is no object within 2 tiles of player.
+            {
+                Debug.Log("2 tile throw.");
+            }
+            else
+            {
+                bool throwCheckClose = CheckInFront(playerViewRange).Item1; //True if object 1 tiles ahead of player.
+
+                if (!throwCheckClose)   //If there is no object in front of the player.
+                {
+                    Debug.Log("1 tile throw.");
+                }
+                else
+                {
+                    Debug.Log("No throw.");
+                    //Don't do anything with the box.
+                }
+                
+            }
+            
         }
 
     }

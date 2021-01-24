@@ -5,6 +5,7 @@ using UnityEngine;
 public class Box : InteractableCarry
 {
     # region Variables
+
     public Vector3 throwLocation;
 
     public LayerMask ignoreGrass;
@@ -68,32 +69,33 @@ public class Box : InteractableCarry
     //     }
     // }
 
-    // void ThrowBox(Vector3 startPos, Vector3 endPos, bool startThrow)
-    // {
-    //     player.animator.SetBool("IsCarrying", false);
+    void ThrowBox(Vector3 startPos, Vector3 endPos, bool startThrow)
+    {
+        //player.animator.SetBool("IsCarrying", false);
 
-    //     if (startThrow)
-    //     {
-    //         incrementor += 0.04f;
-    //         Vector3 currentPos = Vector3.Lerp(startPos, endPos, incrementor);
-    //         currentPos.y += 0.5f * height * Mathf.Sin(Mathf.Clamp01(incrementor) * Mathf.PI);
-    //         currentPos.z -= height * Mathf.Sin(Mathf.Clamp01(incrementor) * Mathf.PI);
-    //         Debug.Log(currentPos.z);
-    //         transform.position = currentPos;
-    //     }
-    //     if (transform.position == endPos)
-    //     {
-    //         startThrow = false;
-    //         incrementor = 0;
-    //         Vector3 tempPos = startPos;
-    //         startPos = transform.position;
-    //         endPos = tempPos;
+        if (startThrow)
+        {
+            incrementor += 0.04f;
+            Vector3 currentPos = Vector3.Lerp(startPos, endPos, incrementor);
+            currentPos.y += 0.5f * height * Mathf.Sin(Mathf.Clamp01(incrementor) * Mathf.PI);
+            currentPos.z -= height * Mathf.Sin(Mathf.Clamp01(incrementor) * Mathf.PI);
+            Debug.Log(currentPos.z);
+            transform.position = currentPos;
+        }
+        if (transform.position == endPos)
+        {
+            startThrow = false;
+            incrementor = 0;
+            Vector3 tempPos = startPos;
+            startPos = transform.position;
+            endPos = tempPos;
 
-    //         boxState = BoxStates.onGround;
-    //         boxCollider.enabled = !boxCollider.enabled;                 //Turn off BoxCollider while being held.
-    //         player.currentType = PlayerController.PlayerType.nm;
-    //         sprite.sortingLayerName = "Interactive";
-    //     }
-    // }
+            carryState = CarryStates.onGround;
+            boxCollider.enabled = !boxCollider.enabled;                 //Turn off BoxCollider while being held.
+            spriteRenderer.sortingLayerName = "Interactive";
+            //player.currentType = PlayerController.PlayerType.nm;
+            
+        }
+    }
 
 }

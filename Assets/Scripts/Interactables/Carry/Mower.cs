@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Mower : InteractableCarry
 {
+    [SerializeField] bool dropInFront;
     public Vector2 mowerDirection;
     public Animator mowerAnimator;
 
@@ -35,7 +36,15 @@ public class Mower : InteractableCarry
         if (id == this.GetInstanceID())
         {
             carryState = CarryStates.onGround;
-            transform.position = parentObject.transform.TransformPoint(lookDirection);
+            if (dropInFront == true)
+            {
+                transform.position = parentObject.transform.TransformPoint(lookDirection);
+            }
+            else
+            {
+                transform.position = parentObject.transform.position;
+            }
+            
             mowerDirection = lookDirection;
             mowerAnimator.SetFloat("MowerHorDir", mowerDirection.x);
             mowerAnimator.SetFloat("MowerVerDir", mowerDirection.y);

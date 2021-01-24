@@ -146,5 +146,6 @@ MonoBehaviour:
   gizmoRadius: 0.75
   initialParent: {fileID: 0}
   carryState: 0
+  dropInFront: 1
   mowerDirection: {x: 0, y: 0}
   mowerAnimator: {fileID: 4146044019002562852}
