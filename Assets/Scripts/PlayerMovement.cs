@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] bool isMoving, pathBlocked, isTalking = false, waitForInteract = false;
 
-    public float timeToMove = 0.25f;
+    [SerializeField] float timeToMove = 0.25f, throwLength = 0.5125f;
     [SerializeField] private int playerViewRange = 1, buttonNum = 0, maxThrow = 2;
 
     [SerializeField] private Vector2 input, lookDirection;
@@ -148,14 +148,12 @@ public class PlayerMovement : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
         transform.position = targetPos;
 
         isMoving = false;
     }
     
     #endregion
-
 
     #region Interaction Logic
 
@@ -193,7 +191,6 @@ public class PlayerMovement : MonoBehaviour
         else
         {}
     }
-
     private (bool, RaycastHit2D) CheckInFront(int playerViewRange)
     //Checks if there is a collision object in the direction of desired movement.
     //If TRUE: There is an object in front of the player.
@@ -235,7 +232,7 @@ public class PlayerMovement : MonoBehaviour
             if (hit.transform.gameObject.GetComponent<InteractableTalk>())
             {
                 isTalking = !isTalking;
-                SLBEvents.current.PlayerReadInteractable(hit.transform.gameObject.GetInstanceID());
+                PlayerEvents.current.PlayerReadInteractable(hit.transform.gameObject.GetInstanceID());
             }
         }
         
@@ -248,8 +245,10 @@ public class PlayerMovement : MonoBehaviour
                 if (!throwCheck)
                 {
                     Debug.Log(ii + " tile throw.");
-                    SLBEvents.current.PlayerThrowsCarryable(this.gameObject, ii*lookDirection, heldObject.GetInstanceID());
+                    PlayerEvents.current.PlayerThrowsCarryable(this.gameObject, ii*lookDirection, heldObject.GetInstanceID(), throwLength);
+                    StartCoroutine(_PausePlayerCo(1.1f*throwLength));
                     heldObject = null;
+                    
 
                     //Update player animations.
                     type = PlayerType.nm;
@@ -275,7 +274,7 @@ public class PlayerMovement : MonoBehaviour
             if (hit.transform.gameObject.GetComponent<InteractableCarry>() && type == PlayerType.nm)
             {
                 heldObject = hit.transform.gameObject.GetComponent<InteractableCarry>();
-                SLBEvents.current.PlayerPickUpCarryable(this.gameObject, heldObject.GetInstanceID());
+                PlayerEvents.current.PlayerPickUpCarryable(this.gameObject, heldObject.GetInstanceID());
 
                 //Update player animations.
                 if (heldObject.transform.tag == "Mower")
@@ -296,7 +295,7 @@ public class PlayerMovement : MonoBehaviour
             if (type == PlayerType.wm)
             //Debug.Log("Put down mower in front of player.");
             {
-                SLBEvents.current.PlayerPutDownCarryable(this.gameObject, lookDirection, heldObject.GetInstanceID());
+                PlayerEvents.current.PlayerPutDownCarryable(this.gameObject, lookDirection, heldObject.GetInstanceID());
                 type = PlayerType.nm;
                 animator.SetBool("HasMower", false);
                 
@@ -304,7 +303,7 @@ public class PlayerMovement : MonoBehaviour
             else if (type == PlayerType.carry)
             //Debug.Log("Put down heldObject in front of player.");
             {
-                SLBEvents.current.PlayerPutDownCarryable(this.gameObject, lookDirection, heldObject.GetInstanceID());
+                PlayerEvents.current.PlayerPutDownCarryable(this.gameObject, lookDirection, heldObject.GetInstanceID());
                 heldObject = null;
 
                 //Update player animations.
@@ -315,6 +314,35 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
+
+
+    private IEnumerator _PausePlayerCo(float pauseLength)
+    //Coroutine that moves player by one square when called.
+    {
+        isMoving = true;                    //Disables input while the player is moving.
+        animator.SetBool("Moving", false);
+
+        yield return new WaitForSeconds(pauseLength);
+
+        isMoving = false;
+
+        // float elapsedTime = 0f;
+
+        // origPos = transform.position;
+        // targetPos = origPos + direction;
+
+        // while (elapsedTime < timeToMove)
+        // {
+        //     transform.position = Vector3.Lerp(origPos, targetPos, (elapsedTime / timeToMove));
+        //     elapsedTime += Time.deltaTime;
+        //     yield return null;
+        // }
+
+        // transform.position = targetPos;
+
+        // isMoving = false;
+    }
+
     #endregion
 
 

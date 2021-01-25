@@ -1,4 +1,4 @@
-﻿{
+{
     "files.exclude":
     {
         "**/.DS_Store":true,
@@ -68,6 +68,11 @@
         "titleBar.activeForeground": "#e7e7e7",
         "titleBar.inactiveBackground": "#123e7899",
         "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "editor.tokenColorCustomizations": {
+        "[Solarized Dark]": {
+            ""
+        }
     },
     "peacock.color": "#123e78"
 }

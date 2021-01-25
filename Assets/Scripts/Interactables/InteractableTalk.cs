@@ -23,25 +23,25 @@ public class InteractableTalk : Interactable
     #region Setup Logic
     void Start()
     {
-        SLBEvents.current.onPlayerReadInteractable -= ReadInteractable;    //Subscribe this listener.
-        SLBEvents.current.onPlayerReadInteractable += ReadInteractable;    //Subscribe this listener.
+        PlayerEvents.current.onPlayerReadInteractable -= ReadInteractable;    //Subscribe this listener.
+        PlayerEvents.current.onPlayerReadInteractable += ReadInteractable;    //Subscribe this listener.
         dMan = FindObjectOfType<DialogueManager>();
     }
 
     void OnEnable()
     //Set up events.
     {
-        if (SLBEvents.current != null)
+        if (PlayerEvents.current != null)
         {
-            SLBEvents.current.onPlayerReadInteractable -= ReadInteractable;    //Subscribe this listener.
-            SLBEvents.current.onPlayerReadInteractable += ReadInteractable;    //Subscribe this listener.
+            PlayerEvents.current.onPlayerReadInteractable -= ReadInteractable;    //Subscribe this listener.
+            PlayerEvents.current.onPlayerReadInteractable += ReadInteractable;    //Subscribe this listener.
         }
     }
 
     private void OnDisable()
     //Remove the listener when the object is disabled.
     {
-        SLBEvents.current.onPlayerReadInteractable -= ReadInteractable;
+        PlayerEvents.current.onPlayerReadInteractable -= ReadInteractable;
     }
     #endregion
 

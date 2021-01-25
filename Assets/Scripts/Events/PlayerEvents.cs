@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 //using UnityEngine.Events;
 
-public class SLBEvents : MonoBehaviour
+public class PlayerEvents : MonoBehaviour
 {
     #region Setup Logic
-    public static SLBEvents current;
+    public static PlayerEvents current;
 
     private void Awake() 
     { current = this; }
@@ -27,11 +27,10 @@ public class SLBEvents : MonoBehaviour
         onPlayerPutDownCarryable?.Invoke(gameObject, lookDirection, id);
     }
 
-
-    public event Action<GameObject, Vector2, int> onPlayerThrowCarryable;
-    public void PlayerThrowsCarryable(GameObject gameObject, Vector2 lookDirection, int id)
+    public event Action<GameObject, Vector2, int, float> onPlayerThrowCarryable;
+    public void PlayerThrowsCarryable(GameObject gameObject, Vector2 lookDirection, int id, float throwTime)
     { 
-        onPlayerThrowCarryable?.Invoke(gameObject, lookDirection, id);
+        onPlayerThrowCarryable?.Invoke(gameObject, lookDirection, id, throwTime);
     }
 
 

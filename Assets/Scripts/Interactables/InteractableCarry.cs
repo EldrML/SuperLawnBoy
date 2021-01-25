@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using ExtensionMethods;
 
 public class InteractableCarry : Interactable
 {
@@ -10,7 +11,7 @@ public class InteractableCarry : Interactable
 
     #region Variables
 
-    protected float throwTime = 0.25f, heightCheck = 0.5f, incrementor = 0f, arcSpeed = 2.0f, startTime;
+    protected float heightCheck = 0.5f, incrementor = 0f, startTime, throwAdjust = 0.1f;
 
     protected Vector3 boxEndPosition;
 
@@ -33,6 +34,7 @@ public class InteractableCarry : Interactable
 
 
     #region Setup Logic
+
     protected virtual void Start()
     //Called before the first frame.
     {
@@ -45,13 +47,13 @@ public class InteractableCarry : Interactable
         boxCollider = GetComponent<BoxCollider2D>();
 
         //Unsubscribe the listeners first to avoid double triggering.
-        SLBEvents.current.onPlayerPickUpCarryable   -= PickUpCarryObj;
-        SLBEvents.current.onPlayerPutDownCarryable  -= PutDownCarryObj;
-        SLBEvents.current.onPlayerThrowCarryable    -= ThrowCarryObj;
+        PlayerEvents.current.onPlayerPickUpCarryable   -= PickUpCarryObj;
+        PlayerEvents.current.onPlayerPutDownCarryable  -= PutDownCarryObj;
+        PlayerEvents.current.onPlayerThrowCarryable    -= ThrowCarryObj;
 
-        SLBEvents.current.onPlayerPickUpCarryable   += PickUpCarryObj;      //Subscribe listeners.
-        SLBEvents.current.onPlayerPutDownCarryable  += PutDownCarryObj;  
-        SLBEvents.current.onPlayerThrowCarryable    += ThrowCarryObj;   
+        PlayerEvents.current.onPlayerPickUpCarryable   += PickUpCarryObj;      //Subscribe listeners.
+        PlayerEvents.current.onPlayerPutDownCarryable  += PutDownCarryObj;  
+        PlayerEvents.current.onPlayerThrowCarryable    += ThrowCarryObj;   
     }
 
     protected virtual void Update()
@@ -66,30 +68,32 @@ public class InteractableCarry : Interactable
     void OnEnable()
     //Set up events.
     {
-        if (SLBEvents.current != null)
+        if (PlayerEvents.current != null)
         {
             //Unsubscribe the listeners first to avoid double triggering.
-            SLBEvents.current.onPlayerPickUpCarryable   -= PickUpCarryObj;
-            SLBEvents.current.onPlayerPutDownCarryable  -= PutDownCarryObj;
-            SLBEvents.current.onPlayerThrowCarryable    -= ThrowCarryObj;
+            PlayerEvents.current.onPlayerPickUpCarryable   -= PickUpCarryObj;
+            PlayerEvents.current.onPlayerPutDownCarryable  -= PutDownCarryObj;
+            PlayerEvents.current.onPlayerThrowCarryable    -= ThrowCarryObj;
 
-            SLBEvents.current.onPlayerPickUpCarryable   += PickUpCarryObj;      //Subscribe listeners.
-            SLBEvents.current.onPlayerPutDownCarryable  += PutDownCarryObj;
-            SLBEvents.current.onPlayerThrowCarryable    += ThrowCarryObj;
+            PlayerEvents.current.onPlayerPickUpCarryable   += PickUpCarryObj;      //Subscribe listeners.
+            PlayerEvents.current.onPlayerPutDownCarryable  += PutDownCarryObj;
+            PlayerEvents.current.onPlayerThrowCarryable    += ThrowCarryObj;
         }
     }
 
     private void OnDisable()
     //Remove the listener when the object is disabled.
     {
-        SLBEvents.current.onPlayerPickUpCarryable   -= PickUpCarryObj;
-        SLBEvents.current.onPlayerPutDownCarryable  -= PutDownCarryObj;
-        SLBEvents.current.onPlayerThrowCarryable    -= ThrowCarryObj;
+        PlayerEvents.current.onPlayerPickUpCarryable   -= PickUpCarryObj;
+        PlayerEvents.current.onPlayerPutDownCarryable  -= PutDownCarryObj;
+        PlayerEvents.current.onPlayerThrowCarryable    -= ThrowCarryObj;
     }
+
     #endregion
 
 
-    #region Event Logic
+    #region Carry Logic
+
     protected virtual void PickUpCarryObj(GameObject parentObject, int id)
     {
         if (id == this.GetInstanceID())
@@ -119,134 +123,92 @@ public class InteractableCarry : Interactable
         }
     }
 
+    #endregion
 
-    void ThrowCarryObj(GameObject parentObject, Vector2 throwDirection, int id)
+
+    #region Throw Logic
+
+    void ThrowCarryObj(GameObject parentObject, Vector2 throwDirection, int id, float throwtime)
     //Sets up the throw conditions for the item the player is carrying.
     {
         if (id == this.GetInstanceID())
         {
-            throwTime = 0.125f * throwDirection.magnitude;
-            Debug.Log(throwTime);
-            boxEndPosition      = parentObject.transform.TransformPoint(throwDirection);     //
-            startTime           = Time.time;                                                      //
+            //throwTime = throwtime * throwDirection.magnitude;                                  //Increase speed of throw depending on length of throw.
+            boxEndPosition      = parentObject.transform.TransformPoint(throwDirection);    
+            startTime           = Time.time;
+
+            //Remove parent from box.
             transform.SetParent(initialParent);
             playerTransform     = null;
-            carryState          = CarryStates.isThrown;
-            //boxCollider.offset  = throwDirection;
-            //boxCollider.enabled = !boxCollider.enabled;                 //Turn off BoxCollider while being held.
 
-            StartCoroutine(ThrowMotion(transform.position, boxEndPosition));
+            //Set throw state for enemy checking.
+            carryState          = CarryStates.isThrown;
+
+            StartCoroutine(ThrowMotion(transform.position, boxEndPosition, throwtime * throwDirection.magnitude, throwDirection));
         }
     }
 
 
-    // protected virtual void ThrowUpdateMotion(Vector3 startPos, Vector3 endPos)
-    // {
-    //     //Implement charge throw: https://forum.unity.com/threads/find-how-long-a-button-is-being-held.482430/
-
-    //     if (carryState == CarryStates.isThrown)
-    //     {
-    //         //Slerp throw implementation.
-    //         Vector3 center = (startPos + endPos) * 0.5f;
-    //         center -= new Vector3(0,1,0);
-
-    //         Vector3 startRelCenter = startPos - center;
-    //         Vector3 endRelCenter = endPos - center;
-
-
-    //         float fracComplete = (Time.time - startTime) / throwTime * arcSpeed;
-    //         Debug.Log("start time: " + startTime + " frac complete: " + fracComplete);
-
-    //         transform.position = Vector3.Slerp(startRelCenter, endRelCenter, fracComplete);
-    //         transform.position += center;
-
-    //         // boxCollider.offset = new Vector2 ( Vector3.Slerp(startRelCenter, endRelCenter, fracComplete).x,
-    //         //                                     Vector3.Slerp(startRelCenter, endRelCenter, fracComplete).y-1f );
-            
-
-    //         // if (transform.position == endPos)
-    //         // //End conditions for the Slerp.
-    //         // {
-    //         //     carryState = CarryStates.onGround;
-    //         //     boxCollider.enabled = !boxCollider.enabled;                 //Turn off BoxCollider while being held.
-    //         //     spriteRenderer.sortingLayerName = "Interactive";
-    //         //     //player.currentType = PlayerController.PlayerType.nm;
-
-    //         //     transform.SetParent(initialParent);
-    //         //     playerTransform = null;
-
-    //         // }
-    //     }
-
-    // }
-
-
-
-    // protected virtual void ThrowCarryObj2(GameObject parentObject, Vector2 throwDirection, int id)
-    // {
-    //     //Implement charge throw: https://forum.unity.com/threads/find-how-long-a-button-is-being-held.482430/
-
-    //     if (id == this.GetInstanceID())
-    //     {
-    //         StartCoroutine(ThrowMotion(transform.position, parentObject.transform.TransformPoint(throwDirection), throwTime));
-    //     }
-
-    //     transform.SetParent(initialParent);
-    //     playerTransform = null;
-    // }
-
-    private IEnumerator ThrowMotion(Vector3 startPos, Vector3 endPos)
+    private IEnumerator ThrowMotion(Vector3 startPos, Vector3 endPos, float throwTime, Vector2 throwDirection)
     //Coroutine that moves player by one square when called.
     {
-
-        carryState = CarryStates.isThrown;
-
         float fracComplete = 0f;
 
-        //startPos = transform.position;
-        // Vector3 endPos = startPos + directionVec;
-        // Debug.Log(directionVec);
-        // Debug.Log(startPos);
-        // Debug.Log(endPos);
-
-        //while (elapsedTime < throwTime)
         while (fracComplete < 1)
         {
-            //Slerp throw implementation.
-            Vector3 center = (startPos + endPos) * 0.5f;
-            center -= new Vector3(0,1,0);
+            //Slerp throw implementation. #TODO I don't really understand what this math does to be honest.
+            Vector3 center = (startPos + endPos) * 0.5f;                                    //Find the midpoint between the start/end.
+            center -= new Vector3(0,1,0);                                                   
 
             Vector3 startRelCenter = startPos - center;
             Vector3 endRelCenter = endPos - center;
 
-            fracComplete = (Time.time - startTime) / throwTime;// * arcSpeed;
-            //Debug.Log("start time: " + startTime + " frac complete: " + fracComplete);
+            fracComplete = (Time.time - startTime) / throwTime;                             //Bigger throw time = 
 
-            transform.position = Vector3.Slerp(startRelCenter, endRelCenter, fracComplete);
-            transform.position += center;
             
-            //ThrowUpdateMotion(startPos, endPos);
 
-            //Vector3 currentPos = Vector3.Lerp(startPos, endPos, (elapsedTime / throwTime));
-            //currentPos.y += 0.5f * heightCheck * Mathf.Sin(Mathf.Clamp01(elapsedTime / throwTime) * Mathf.PI);
-            //currentPos.z -= heightCheck * Mathf.Sin(Mathf.Clamp01(elapsedTime / throwTime) * Mathf.PI);
-            //transform.position = Vector3.Lerp(startPos, endPos, (elapsedTime / throwTime));
-            //transform.position = currentPos;
-
-            //elapsedTime += Time.deltaTime;
-
+            //Adjust the height of the box arc.
+            if (throwDirection.x != 0)   //Throwing left or right.
+            {
+                transform.position = Vector3.Slerp(startRelCenter, endRelCenter, fracComplete); //Perform the Slerp
+                transform.position -= new Vector3(  0f,           
+                                                    throwAdjust * transform.position.y,
+                                                    0f);
+                transform.position += center;
+            }
+            else                        //Throwing up or down.
+            {
+                transform.position = Vector3.Slerp(startRelCenter, endRelCenter, fracComplete); //Perform the Slerp
+                transform.position += center;
+            }
 
             yield return null;
         }
-        transform.position = endPos;            //Clamp to grid
+
+        transform.position = endPos;    //Clamp to grid
 
         carryState                      = CarryStates.onGround;
         boxCollider.enabled             = !boxCollider.enabled;                 //Turn off BoxCollider while being held.
         spriteRenderer.sortingLayerName = "Interactive";
 
+        //Remove parent from object so it stays in place.
         transform.SetParent(initialParent);
         playerTransform                 = null;
 
+        //Check if there is an interaction below the item.
+        if (carryState == CarryStates.isThrown)
+        {
+            CheckBelowObject();
+        }
+    }
+
+
+    protected private virtual void CheckBelowObject()
+    {
+        //If nothing below the object:
+        carryState = CarryStates.onGround;
+
+        Debug.Log("Not yet implemented.");
     }
 
     #endregion
