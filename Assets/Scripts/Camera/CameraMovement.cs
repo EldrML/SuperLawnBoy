@@ -4,20 +4,13 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    public Transform target;
-    public float smoothing;
-    public Vector2 minPosition;
-    public Vector2 maxPosition;
-    
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] Transform target;
+    [SerializeField] float smoothing;
+    [SerializeField] Vector2 minPosition;
+    [SerializeField] Vector2 maxPosition;
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if(transform.position != target.position)
         {

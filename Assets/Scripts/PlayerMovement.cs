@@ -144,11 +144,11 @@ public class PlayerMovement : MonoBehaviour
 
         while (elapsedTime < timeToMove)
         {
-            transform.position = Vector3.Lerp(origPos, targetPos, (elapsedTime / timeToMove));
             elapsedTime += Time.deltaTime;
+            transform.position = Vector3.Lerp(origPos, targetPos, (elapsedTime / timeToMove));
             yield return null;
         }
-        transform.position = targetPos;
+        //transform.position = targetPos;
 
         isMoving = false;
     }

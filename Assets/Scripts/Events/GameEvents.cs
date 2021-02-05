@@ -31,4 +31,11 @@ public class GameEvents : MonoBehaviour
     {
         //Reference: https://www.youtube.com/watch?v=oc3sQamIh-Q
     }
+    
+
+    public event Action<Vector2, Vector2> onMoveRoom;
+    public void MoveCameraRoomLimits(Vector2 newCameraLimitsX, Vector2 newCameraLimitsY)
+    {
+        onMoveRoom?.Invoke(newCameraLimitsX, newCameraLimitsY); 
+    }
 }
