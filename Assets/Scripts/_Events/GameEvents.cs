@@ -26,22 +26,22 @@ public class GameEvents : MonoBehaviour
     }
     
 
-    public event Action onGrassCut;
-    public void GrassIsCut()
+    public event Action<int> onGrassCut;
+    public void GrassIsCut(int id)
     {
-        onGrassCut?.Invoke(); 
+        onGrassCut?.Invoke(id); 
         //Reference: https://www.youtube.com/watch?v=oc3sQamIh-Q
     }
     
-    public event Action onAllGrassIsCut;
-    public void allGrassIsCut()
+    public event Action<int> onAllGrassIsCut;
+    public void allGrassIsCut(int id)
     {
-        onAllGrassIsCut?.Invoke(); 
+        onAllGrassIsCut?.Invoke(id); 
     }
 
-    // public event Action<Vector2, Vector2> onMoveRoom;
-    // public void MoveCameraRoomLimits(Vector2 newCameraLimitsX, Vector2 newCameraLimitsY)
-    // {
-    //     onMoveRoom?.Invoke(newCameraLimitsX, newCameraLimitsY); 
-    // }
+    public event Action<RoomManager> onChangeRoom;
+    public void ChangeRoom(RoomManager newRoom)
+    {
+        onChangeRoom?.Invoke(newRoom); 
+    }
 }

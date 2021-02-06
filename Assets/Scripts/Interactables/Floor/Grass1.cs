@@ -7,7 +7,7 @@ public class Grass1 : InteractableFloor
 {
     [SerializeField] Animator grassAnimator;
     [SerializeField] SpriteRenderer sprite;
-    [SerializeField] bool grassHasBeenCut = false;
+    public bool grassHasBeenCut = false;
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +40,7 @@ public class Grass1 : InteractableFloor
             if(id == this.transform.GetInstanceID() && !grassHasBeenCut)
             {
                 grassHasBeenCut = true;
-                GameEvents.current.GrassIsCut();
+                GameEvents.current.GrassIsCut(transform.parent.parent.transform.GetInstanceID()); //Sends the room ID to 
                 StartCoroutine(CutGrassCo());
             }
         }

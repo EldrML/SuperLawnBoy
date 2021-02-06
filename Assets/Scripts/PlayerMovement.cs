@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] bool isMoving, pathBlocked, isTalking = false, waitForInteract = false;
 
-    [SerializeField] float timeToMove = 0.25f, throwLength = 0.5125f;
+    [SerializeField] float timeToMove = 0.2f, throwLength = 0.5125f;
     [SerializeField] private int playerViewRange = 1, buttonNum = 0, maxThrow = 2;
 
     [SerializeField] private Vector2 input, lookDirection;
@@ -173,7 +173,8 @@ public class PlayerMovement : MonoBehaviour
         isMoving = false;
     }
     
-    private void _VictoryStateSwitcher()
+    private void _VictoryStateSwitcher(int id)
+    //ID Is not used here, since there is only one player.
     //Event called when all grass is cut.
     //#TODO: Currently this only works for cutting all grass in the entire level. We want to make it just for the room.
     {

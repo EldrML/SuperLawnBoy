@@ -11,9 +11,13 @@ public class GateManager : MonoBehaviour
         GameEvents.current.onAllGrassIsCut += GateSwitch;
     }
 
-    void GateSwitch()
+    void GateSwitch(int id)
     {
-        gameObject.SetActive(false);
+        if (id == this.transform.parent.transform.GetInstanceID())
+        {
+            gameObject.SetActive(false);
+        }
+
     }
 
 }

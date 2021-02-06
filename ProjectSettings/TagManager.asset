@@ -4,14 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemies
-  - Move Point
   - Wall
   - Sign
   - Mower
   - Grass
   - Box
   - TemporaryWall
+  - Room
   layers:
   - Default
   - TransparentFX
@@ -20,7 +19,7 @@ TagManager:
   - Water
   - UI
   - Impassable
-  - 
+  - GrassLayer
   - CollisionLayer
   - WalkOverLayer
   - 

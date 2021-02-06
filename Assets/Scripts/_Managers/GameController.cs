@@ -9,38 +9,46 @@ Game Controller
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] int grassInRoom;
-    [SerializeField] int grassInLevel;
-    [SerializeField] PolygonCollider2D currentRoom;
+    //[SerializeField] int grassInRoom;
+    [SerializeField] int grassInLevel, roomsToClear;
+    [SerializeField] RoomManager currentRoomManager;
+    //[SerializeField] PolygonCollider2D currentRoom;
 
     // Start is called before the first frame update
     void Start()
     {
+        roomsToClear = GameObject.FindGameObjectsWithTag("Room").Length;
         grassInLevel = GameObject.FindGameObjectsWithTag("Grass").Length;
+        //grassInRoom = 
 
         //subscribe Listeners.
-        GameEvents.current.onGrassCut -= GrassIsCut;
-        GameEvents.current.onGrassCut += GrassIsCut;
+        GameEvents.current.onAllGrassIsCut -= AllGrassIsCut;
+        GameEvents.current.onAllGrassIsCut += AllGrassIsCut;
+
+        GameEvents.current.onChangeRoom -= ChangeRoomManager;
+        GameEvents.current.onChangeRoom += ChangeRoomManager;
 
         
     }
 
-    // Update is called once per frame
-    void Update()
+    void ChangeRoomManager(RoomManager newRoomManager)
+    //Update the room being affected by the player. May not be needed?
     {
-        //grassInLevel = GameObject.FindGameObjectsWithTag("Grass").Length;
+        currentRoomManager = newRoomManager;
     }
 
-    void GrassIsCut()
+    void AllGrassIsCut(int id)
+    //id shouldn't be needed here, there is only one Game Controller for the level.
+    //#TODO: Keep track of the number of rooms which have been cleared?
     {   
-        if (grassInLevel > 0)
+        if (roomsToClear > 0)
         {
-            grassInLevel -= 1;
+            roomsToClear -= 1;
 
-            if (grassInLevel == 0)
+            if (roomsToClear == 0)
             {
-                GameEvents.current.allGrassIsCut();
-                Debug.Log("ALL GRASS CUT!");
+                //GameEvents.current.allGrassIsCut(currentRoomManager.transform.GetInstanceID());
+                Debug.Log("ALL ROOMS CLEAR!");
             }
         }
         
