@@ -11,6 +11,7 @@ TagManager:
   - Mower
   - Grass
   - Box
+  - TemporaryWall
   layers:
   - Default
   - TransparentFX
