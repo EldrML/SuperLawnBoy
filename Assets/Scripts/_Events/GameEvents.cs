@@ -29,13 +29,19 @@ public class GameEvents : MonoBehaviour
     public event Action onGrassCut;
     public void GrassIsCut()
     {
+        onGrassCut?.Invoke(); 
         //Reference: https://www.youtube.com/watch?v=oc3sQamIh-Q
     }
     
-
-    public event Action<Vector2, Vector2> onMoveRoom;
-    public void MoveCameraRoomLimits(Vector2 newCameraLimitsX, Vector2 newCameraLimitsY)
+    public event Action onAllGrassIsCut;
+    public void allGrassIsCut()
     {
-        onMoveRoom?.Invoke(newCameraLimitsX, newCameraLimitsY); 
+        onAllGrassIsCut?.Invoke(); 
     }
+
+    // public event Action<Vector2, Vector2> onMoveRoom;
+    // public void MoveCameraRoomLimits(Vector2 newCameraLimitsX, Vector2 newCameraLimitsY)
+    // {
+    //     onMoveRoom?.Invoke(newCameraLimitsX, newCameraLimitsY); 
+    // }
 }

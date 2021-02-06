@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class Grass1 : InteractableFloor
 {
-    public Animator grassAnimator;
-    public SpriteRenderer sprite;
+    [SerializeField] Animator grassAnimator;
+    [SerializeField] SpriteRenderer sprite;
+    [SerializeField] bool grassHasBeenCut = false;
 
     // Start is called before the first frame update
     void Start()
@@ -36,8 +37,10 @@ public class Grass1 : InteractableFloor
     {
         if (playerType == 1)
         {
-            if(id == this.transform.GetInstanceID())
+            if(id == this.transform.GetInstanceID() && !grassHasBeenCut)
             {
+                grassHasBeenCut = true;
+                GameEvents.current.GrassIsCut();
                 StartCoroutine(CutGrassCo());
             }
         }

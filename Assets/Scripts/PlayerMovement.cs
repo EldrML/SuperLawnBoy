@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     enum PlayerState
     {
-        move, hurt, dash, action,
+        move, hurt, dash, action, victory
     }
 
     enum PlayerType
@@ -35,12 +35,32 @@ public class PlayerMovement : MonoBehaviour
 
     #endregion
 
+    private void Start() 
+    //Start setup.
+    {
+        GameEvents.current.onAllGrassIsCut += _VictoryStateSwitcher;
+    }
+
 
     #region Update Logic
 
     void Update()
     //Core Logic Loop for player.
     {
+        if(state == PlayerState.victory)
+        //If the player is going through the victory cutscene, pause all inputs.
+        {
+            if (!isMoving)
+            {
+                isMoving = true;
+                animator.SetBool("VictoryAnimation", true);
+                //isMoving = true;
+                //StartCoroutine(_VictoryPoseCo());
+            }
+
+            return;
+        }
+
         if (isMoving && InteractInput() != 0)
         //Logic used to queue up an action to do when reaching the next grid square.
         {
@@ -153,6 +173,42 @@ public class PlayerMovement : MonoBehaviour
         isMoving = false;
     }
     
+    private void _VictoryStateSwitcher()
+    //Event called when all grass is cut.
+    //#TODO: Currently this only works for cutting all grass in the entire level. We want to make it just for the room.
+    {
+        if (state != PlayerState.victory)
+        {
+            state = PlayerState.victory;
+            isMoving = true;
+        }
+        else
+        //Triggers again at the end of the animation.
+        {
+            animator.SetBool("VictoryAnimation", false);
+            isMoving = false;
+            state = PlayerState.move;
+        }
+        
+    }
+
+    // private IEnumerator _VictoryPoseCo()
+    // {
+    //     isMoving = true;
+    //     animator.SetBool("VictoryAnimation", true);
+    //     //AnimationClip victoryClip = animator.GetStateByName( "Running" ).clip;
+    //     //float timeOfAnimation = victoryClip[0].clip.length;
+
+    //     //Debug.Log(timeOfAnimation);
+    //     //float timeOfAnimation = animator.runtimeAnimatorController.animationClips[0].length;
+        
+    //     //animator.runtimeAnimatorController.animationClips.
+    //     //yield return new WaitForSeconds (timeOfAnimation);
+    //     yield return n
+        
+
+    // }
+
     #endregion
 
     #region Interaction Logic
