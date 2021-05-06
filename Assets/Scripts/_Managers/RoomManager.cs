@@ -13,17 +13,17 @@ Room Manager
 public class RoomManager : MonoBehaviour
 {
     [SerializeField] float dampingSpeed;
-    [SerializeField] int grassInRoom;
+    public int grassInRoom; //TODO Remove Public variable and replace with event?
     [SerializeField] GameObject grassList;
     [SerializeField] CinemachineConfiner cinConfiner;
 
     // Start is called before the first frame update
     private void Start()
     {
-        GameEvents.current.onGrassCut -= GrassIsCut;
-        GameEvents.current.onGrassCut += GrassIsCut; //Add this to your list of subscribed events.
+        GameEvents.current.onGrassCut -= GrassIsCut;                                //
+        GameEvents.current.onGrassCut += GrassIsCut;                                //Add this to your list of subscribed events.
 
-        grassInRoom = grassList.transform.childCount;
+        grassInRoom = grassList.transform.childCount;                               //Count list of grass objects to cut.
         cinConfiner = Camera.main.GetComponentInChildren<CinemachineConfiner>();
     }
 
@@ -78,9 +78,13 @@ public class RoomManager : MonoBehaviour
         for (int i = 0; i < grassList.transform.childCount; i++)
         {
             grassList.transform.GetChild(i).gameObject.SetActive(true);
-            grassList.transform.GetChild(i).GetComponent<Grass1>().grassHasBeenCut = false;
+            //grassList.transform.GetChild(i).GetComponent<Grass1>().grassHasBeenCut = false;
+            
+            //Replace with sending a signal to the 
         }
+        UI_AreaScore.AreaGrassCount_value = UI_AreaScore.AreaGrassCount_value - grassInRoom;
         grassInRoom = grassList.transform.childCount;
+        UI_AreaScore.AreaGrassCount_value = UI_AreaScore.AreaGrassCount_value + grassInRoom;
     }
 
     void GrassIsCut(int id)
@@ -89,7 +93,12 @@ public class RoomManager : MonoBehaviour
         {
             if (grassInRoom > 0)
             {
-                grassInRoom -= 1;
+                //REDUCE GRASS COUNTER WITHIN THE ROOM
+                grassInRoom -= 1; 
+                UI_RoomScore.RoomGrassCount_value -= 1;
+
+                //REDUCE TOTAL GRASS AMOUNT;
+                UI_AreaScore.AreaGrassCount_value -= 1;
 
                 if (grassInRoom == 0)
                 {

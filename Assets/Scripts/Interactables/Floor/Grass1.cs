@@ -7,7 +7,7 @@ public class Grass1 : InteractableFloor
 {
     [SerializeField] Animator grassAnimator;
     [SerializeField] SpriteRenderer sprite;
-    public bool grassHasBeenCut = false;
+    [SerializeField] bool grassHasBeenCut = false;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +22,7 @@ public class Grass1 : InteractableFloor
     {
         if (GameEvents.current != null)
         {
+            grassHasBeenCut = false;
             GameEvents.current.onEnterGrassSquare -= CheckForMower;
             GameEvents.current.onEnterGrassSquare += CheckForMower; //Add this to your list of subscribed events.
         }

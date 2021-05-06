@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     //[SerializeField] int grassInRoom;
     [SerializeField] int grassInLevel, roomsToClear;
     [SerializeField] RoomManager currentRoomManager;
+    [SerializeField] UI_RoomScore ui_roomScore;
     //[SerializeField] PolygonCollider2D currentRoom;
 
     // Start is called before the first frame update
@@ -19,9 +20,12 @@ public class GameController : MonoBehaviour
     {
         roomsToClear = GameObject.FindGameObjectsWithTag("Room").Length;
         grassInLevel = GameObject.FindGameObjectsWithTag("Grass").Length;
-        //grassInRoom = 
+        UI_AreaScore.AreaGrassCount_value = grassInLevel;
 
         //subscribe Listeners.
+        GameEvents.current.onGrassCut -= GrassIsCut;                                //Event to track total amount of grass in the area.
+        GameEvents.current.onGrassCut += GrassIsCut;
+        
         GameEvents.current.onAllGrassIsCut -= AllGrassIsCut;
         GameEvents.current.onAllGrassIsCut += AllGrassIsCut;
 
@@ -34,7 +38,14 @@ public class GameController : MonoBehaviour
     void ChangeRoomManager(RoomManager newRoomManager)
     //Update the room being affected by the player. May not be needed?
     {
+        grassInLevel = UI_AreaScore.AreaGrassCount_value;
         currentRoomManager = newRoomManager;
+        UI_RoomScore.RoomGrassCount_value = currentRoomManager.grassInRoom;
+    }
+
+    void GrassIsCut(int id)
+    {
+        grassInLevel = UI_AreaScore.AreaGrassCount_value;
     }
 
     void AllGrassIsCut(int id)
