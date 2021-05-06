@@ -22,7 +22,7 @@ public class Grass1 : InteractableFloor
     {
         if (GameEvents.current != null)
         {
-            grassHasBeenCut = false;
+            grassHasBeenCut = false;                                //Resets the grass cut counter.
             GameEvents.current.onEnterGrassSquare -= CheckForMower;
             GameEvents.current.onEnterGrassSquare += CheckForMower; //Add this to your list of subscribed events.
         }

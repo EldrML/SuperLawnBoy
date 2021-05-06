@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UI_AreaScore : MonoBehaviour
 {
-    public static int AreaGrassCount_value;
+    //public static int AreaGrassCount_value;
     Text AreaGrassCount_text;
 
     // Start is called before the first frame update
@@ -17,6 +17,6 @@ public class UI_AreaScore : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        AreaGrassCount_text.text = AreaGrassCount_value.ToString();
+        AreaGrassCount_text.text = GameController.LevelGrassCount.ToString();
     }
 }

@@ -12,15 +12,26 @@ public class GameController : MonoBehaviour
     //[SerializeField] int grassInRoom;
     [SerializeField] int grassInLevel, roomsToClear;
     [SerializeField] RoomManager currentRoomManager;
-    [SerializeField] UI_RoomScore ui_roomScore;
+    //[SerializeField] UI_RoomScore ui_roomScore;
+    public static int RoomGrassCount;
+    public static int LevelGrassCount;
+    public static int InitialRoomCount;
+    public static int InitialLevelCount;
     //[SerializeField] PolygonCollider2D currentRoom;
 
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("For when you eventually have multiple scenes but want to keep the game manager running");
+        Debug.Log("https://stackoverflow.com/questions/35890932/unity-game-manager-script-works-only-one-time/35891919#35891919");
+
         roomsToClear = GameObject.FindGameObjectsWithTag("Room").Length;
-        grassInLevel = GameObject.FindGameObjectsWithTag("Grass").Length;
-        UI_AreaScore.AreaGrassCount_value = grassInLevel;
+        LevelGrassCount = GameObject.FindGameObjectsWithTag("Grass").Length;
+        RoomGrassCount = currentRoomManager.grassInRoom;
+        InitialRoomCount = RoomGrassCount;
+        InitialLevelCount = LevelGrassCount;
+        //grassInLevel = GameObject.FindGameObjectsWithTag("Grass").Length;
+        //UI_AreaScore.AreaGrassCount_value = grassInLevel;
 
         //subscribe Listeners.
         GameEvents.current.onGrassCut -= GrassIsCut;                                //Event to track total amount of grass in the area.
@@ -38,14 +49,39 @@ public class GameController : MonoBehaviour
     void ChangeRoomManager(RoomManager newRoomManager)
     //Update the room being affected by the player. May not be needed?
     {
-        grassInLevel = UI_AreaScore.AreaGrassCount_value;
-        currentRoomManager = newRoomManager;
-        UI_RoomScore.RoomGrassCount_value = currentRoomManager.grassInRoom;
+        //grassInLevel = UI_AreaScore.AreaGrassCount_value;
+        if (RoomGrassCount > 0)
+        {
+            LevelGrassCount = InitialLevelCount;
+            currentRoomManager = newRoomManager;
+        }
+        else
+        {
+            currentRoomManager = newRoomManager;
+            //RoomGrassCount = currentRoomManager.grassInRoom;
+        }
+        
+        
     }
 
     void GrassIsCut(int id)
     {
-        grassInLevel = UI_AreaScore.AreaGrassCount_value;
+        if (id == currentRoomManager.transform.GetInstanceID())
+        {
+            if (RoomGrassCount > 0)
+            {
+                //REDUCE GRASS COUNTER WITHIN THE ROOM
+                    RoomGrassCount -= 1;
+                //REDUCE TOTAL GRASS AMOUNT
+                    LevelGrassCount -= 1;
+
+                if (RoomGrassCount == 0)
+                {
+                    GameEvents.current.allGrassIsCut(this.transform.GetInstanceID()); //ID not necessary here, just triggering the victory in the room.
+                    Debug.Log("ALL GRASS in room CUT!");
+                }
+            }
+        }
     }
 
     void AllGrassIsCut(int id)

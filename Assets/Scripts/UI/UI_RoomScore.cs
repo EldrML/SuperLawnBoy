@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UI_RoomScore : MonoBehaviour
 {
-    public static int RoomGrassCount_value;
+    //public static int RoomGrassCount_value;
     Text RoomGrassCount_text;
     
     // Start is called before the first frame update
@@ -17,6 +17,6 @@ public class UI_RoomScore : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RoomGrassCount_text.text = RoomGrassCount_value.ToString();
+        RoomGrassCount_text.text = GameController.RoomGrassCount.ToString();
     }
 }
