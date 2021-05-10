@@ -115,7 +115,7 @@ public class InteractableCarry : Interactable
         {
             carryState          = CarryStates.onGround;
             transform.position  = parentObject.transform.TransformPoint(lookDirection);
-            spriteRenderer.sortingLayerName = "Interactive";
+            spriteRenderer.sortingLayerName = "CarryItem";
             boxCollider.enabled = !boxCollider.enabled;                 //Turn on BoxCollider while being released.
 
             transform.SetParent(initialParent);
@@ -189,7 +189,7 @@ public class InteractableCarry : Interactable
 
         carryState                      = CarryStates.onGround;
         boxCollider.enabled             = !boxCollider.enabled;                 //Turn off BoxCollider while being held.
-        spriteRenderer.sortingLayerName = "Interactive";
+        spriteRenderer.sortingLayerName = "CarryItem";
 
         //Remove parent from object so it stays in place.
         transform.SetParent(initialParent);

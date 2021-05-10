@@ -69,3 +69,6 @@ TagManager:
   - name: CarryItem
     uniqueID: 4149989699
     locked: 0
+  - name: UI
+    uniqueID: 441309939
+    locked: 0
