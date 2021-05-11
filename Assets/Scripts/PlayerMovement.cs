@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Vector2 input, lookDirection;
 
-    private Vector3 origPos, targetPos;
+    [SerializeField] private Vector3 origPos, targetPos;
 
     public Animator animator;
 
@@ -39,6 +39,9 @@ public class PlayerMovement : MonoBehaviour
     //Start setup.
     {
         GameEvents.current.onAllGrassIsCut += _VictoryStateSwitcher;
+
+        PlayerEvents.current.onPlayerTeleport -= TransferPlayer;
+        PlayerEvents.current.onPlayerTeleport += TransferPlayer;
     }
 
 
@@ -211,6 +214,7 @@ public class PlayerMovement : MonoBehaviour
     // }
 
     #endregion
+
 
     #region Interaction Logic
 
@@ -418,6 +422,14 @@ public class PlayerMovement : MonoBehaviour
         {
             GameEvents.current.EnterGrassSquare((int)type, otherObj.transform.GetInstanceID());
         }
+    }
+
+    void TransferPlayer(int id, Vector3 outputPosition)
+    {
+        origPos = outputPosition;
+        transform.position = outputPosition;
+        targetPos = origPos;
+        //targetPos = origPos + new Vector3(input.x, input.y, 0);
     }
     #endregion
 

@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour
     //[SerializeField] int grassInRoom;
     [SerializeField] int roomsToClear;
     [SerializeField] RoomManager currentRoomManager;
-    //[SerializeField] UI_RoomScore ui_roomScore;
+    [SerializeField] float dampingSpeed = 1f;
     public static int RoomGrassCount;
     public static int LevelGrassCount;
     public static int InitialLevelCount;
@@ -89,7 +89,9 @@ public class GameController : MonoBehaviour
             RoomGrassCount = CountGrassInRoom();
         }
 
+        // SmoothRoomTransition(); DOESNT WORK, WHY?
         cinConfiner.m_BoundingShape2D = currentRoomManager.GetComponentInParent<PolygonCollider2D>();
+        
     }
 
     void GrassIsCut(int id)
@@ -134,9 +136,9 @@ public class GameController : MonoBehaviour
     private IEnumerator SmoothRoomTransition()
     //Need to decide whether to have a smooth camera transfer or not.
     {
-        //cinConfiner.m_Damping = dampingSpeed;
+        cinConfiner.m_Damping = dampingSpeed;
         yield return new WaitForSeconds(1);
-        //cinConfiner.m_Damping = 0;
+        cinConfiner.m_Damping = 0;
     }
 }
 

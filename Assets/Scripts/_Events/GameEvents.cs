@@ -44,4 +44,10 @@ public class GameEvents : MonoBehaviour
     {
         onChangeRoom?.Invoke(newRoom); 
     }
+
+    public event Action<int, Vector3> onScreenFade;
+    public void ScreenFade(int id, Vector3 outputPosition)
+    {
+        onScreenFade?.Invoke(id, outputPosition);
+    }
 }
