@@ -84,7 +84,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &1413807269
@@ -141,19 +141,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 4518269238913542741}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e0928fc19ed55641bf116709b3d2087, type: 3}
+  m_Script: {fileID: 11500000, guid: 563668986aec3a74a837a0cb96f0ae4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isMoving: 0
   pathBlocked: 0
   isTalking: 0
   waitForInteract: 0
-  timeToMove: 0.3
+  timeToMove: 0.2
+  throwLength: 0.5125
   playerViewRange: 1
   buttonNum: 0
+  maxThrow: 2
   input: {x: 0, y: 0}
   lookDirection: {x: 0, y: 0}
-  animator: {fileID: 4518269238913542739}
+  origPos: {x: 0, y: 0, z: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  animator: {fileID: 0}
   state: 0
   type: 0
   heldObject: {fileID: 0}

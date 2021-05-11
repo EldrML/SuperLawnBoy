@@ -258,8 +258,16 @@ PrefabInstance:
       value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 1413807275, guid: 4aa0f594962042945afb30a68d69c2a8, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1023590490}
+    - target: {fileID: 1413807275, guid: 4aa0f594962042945afb30a68d69c2a8, type: 3}
       propertyPath: maxThrow
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1413807275, guid: 4aa0f594962042945afb30a68d69c2a8, type: 3}
+      propertyPath: timeToMove
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 1413807275, guid: 4aa0f594962042945afb30a68d69c2a8, type: 3}
       propertyPath: throwLength
@@ -2569,10 +2577,10 @@ RectTransform:
   m_Father: {fileID: 1604611533}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 490, y: 440}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &637981740
 MonoBehaviour:
@@ -6178,6 +6186,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3092350168973973040, guid: 1af633263bed6b446a84a4ceb1c7a7eb,
     type: 3}
   m_PrefabInstance: {fileID: 2136251696}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1023590490 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4518269238913542739, guid: 4aa0f594962042945afb30a68d69c2a8,
+    type: 3}
+  m_PrefabInstance: {fileID: 178859258}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1057373507
 PrefabInstance:

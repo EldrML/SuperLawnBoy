@@ -41,7 +41,7 @@ public class PlayerEvents : MonoBehaviour
     }
 
     public event Action<int, Vector3> onPlayerTeleport;
-    public void TeleportPlayer(int id, Vector3 outputPosition)
+    public void PlayerTeleport(int id, Vector3 outputPosition)
     {
         onPlayerTeleport?.Invoke(id, outputPosition);
     }

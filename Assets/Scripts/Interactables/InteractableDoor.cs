@@ -15,6 +15,5 @@ public class InteractableDoor : Interactable
     private void OnTriggerEnter2D(Collider2D other) 
     {
         GameEvents.current.ScreenFade(other.transform.GetInstanceID(), outputLocation.position);    //Signal to GameController.cs.
-        Debug.Log("Inside the door.");
     }
 }
