@@ -13,13 +13,9 @@ public class GameController : MonoBehaviour
     //[SerializeField] int grassInRoom;
     [SerializeField] int roomsToClear;
     [SerializeField] RoomManager currentRoomManager;
-    [SerializeField] float dampingSpeed = 1f;
     public static int RoomGrassCount;
     public static int LevelGrassCount;
     public static int InitialLevelCount;
-    public CinemachineConfiner cinConfiner;
-    //public Transform testVar;
-    //[SerializeField] PolygonCollider2D currentRoom;
 
     // Start is called before the first frame update
     void Start()
@@ -30,9 +26,6 @@ public class GameController : MonoBehaviour
         roomsToClear = GameObject.FindGameObjectsWithTag("Room").Length;
         LevelGrassCount = GameObject.FindGameObjectsWithTag("Grass").Length;
 
-        //--TURN INTO A SEPARATE CAMERA MANAGER--
-        cinConfiner = Camera.main.GetComponentInChildren<CinemachineConfiner>();
-
         //Subscribe Listeners.
         GameEvents.current.onGrassCut -= GrassIsCut;                                //Event to track total amount of grass in the area.
         GameEvents.current.onGrassCut += GrassIsCut;
@@ -41,9 +34,7 @@ public class GameController : MonoBehaviour
         GameEvents.current.onAllGrassIsCut += AllGrassIsCut;
 
         GameEvents.current.onChangeRoom -= ChangeRoomManager;
-        GameEvents.current.onChangeRoom += ChangeRoomManager;    
-
-        
+        GameEvents.current.onChangeRoom += ChangeRoomManager;  
     }
 
     int CountGrassInRoom()
@@ -61,7 +52,7 @@ public class GameController : MonoBehaviour
     }
 
     void ChangeRoomManager(RoomManager newRoomManager)
-    //Update the room being affected by the player. May not be needed?
+    //Update the room being affected by the player.
     {
         if (RoomGrassCount > 0)
         {
@@ -88,10 +79,6 @@ public class GameController : MonoBehaviour
             currentRoomManager = newRoomManager;
             RoomGrassCount = CountGrassInRoom();
         }
-
-        // SmoothRoomTransition(); DOESNT WORK, WHY?
-        cinConfiner.m_BoundingShape2D = currentRoomManager.GetComponentInParent<PolygonCollider2D>();
-        
     }
 
     void GrassIsCut(int id)
@@ -109,8 +96,7 @@ public class GameController : MonoBehaviour
                 {
                     GameEvents.current.allGrassIsCut(currentRoomManager.transform.GetInstanceID()); //ID not necessary here, just triggering the victory in the room.
                     Debug.Log("ALL GRASS in room CUT!");
-                    Debug.Log("May need a coroutine to prevent the gate from opening too fast.");
-                    Debug.Log("Remember that you can't let go of the mower if you are facing something. Fix later?");
+                    //Debug.Log("May need a coroutine to prevent the gate from opening too fast.");
                 }
             }
         }
@@ -133,12 +119,5 @@ public class GameController : MonoBehaviour
         
     }
 
-    private IEnumerator SmoothRoomTransition()
-    //Need to decide whether to have a smooth camera transfer or not.
-    {
-        cinConfiner.m_Damping = dampingSpeed;
-        yield return new WaitForSeconds(1);
-        cinConfiner.m_Damping = 0;
-    }
 }
 

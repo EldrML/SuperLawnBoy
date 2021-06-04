@@ -13,6 +13,7 @@ Room Manager
 public class RoomManager : MonoBehaviour
 {
     [SerializeField] GameObject grassList;
+    [SerializeField] GameObject virtualCamera;
 
     private void Start() {}
 
@@ -22,6 +23,16 @@ public class RoomManager : MonoBehaviour
         if (otherObj.CompareTag("Player"))
         {
                 GameEvents.current.ChangeRoom(this);
+                virtualCamera.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D otherObj)
+    //When entering a new room. ALSO TRIGGERS AT BEGINNING OF GAME
+    {
+        if (otherObj.CompareTag("Player"))
+        {
+                virtualCamera.SetActive(false);
         }
     }
 

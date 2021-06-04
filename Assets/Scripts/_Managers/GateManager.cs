@@ -13,8 +13,8 @@ public class GateManager : MonoBehaviour
 
     void GateSwitch(int id)
     {
-        Debug.Log(id);
-        Debug.Log(this.transform.parent.transform.GetInstanceID());
+        //Debug.Log(id);
+        //Debug.Log(this.transform.parent.transform.GetInstanceID());
         if (id == this.transform.parent.transform.GetInstanceID())
         {
             gameObject.SetActive(false);
