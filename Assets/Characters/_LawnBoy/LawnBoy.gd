@@ -31,7 +31,7 @@ func move(dir):
 		tween.tween_callback(func(): moving = false)
 
 #DOCSTRING TODO
-func input_processor():
+func _input_processor():
 	for dir in inputs.keys():
 		if Input.is_action_just_pressed(dir):
 			pressed_inputs.append(dir)
@@ -39,14 +39,33 @@ func input_processor():
 			pressed_inputs.erase(dir)
 		#TODO: set up-down or left-right to cancel each other out!
 		
+func _input_direction_canceling(move_dir):
+	if move_dir == "left":
+		if self.pressed_inputs.has("right"):
+			return false
+	elif move_dir == "right":
+		if self.pressed_inputs.has("left"):
+			return false
+	if move_dir == "up":
+		if self.pressed_inputs.has("down"):
+			return false
+	elif move_dir == "down":
+		if self.pressed_inputs.has("up"):
+			return false	
+	
+	return true
+
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	input_processor()
+	_input_processor()
 	
 	# Movement processing
-	if !pressed_inputs.is_empty() and moving == false:
-		moving = true
-		var anim_str = "walk_" + pressed_inputs.back()
-		anim_player.play(anim_str)
-		move(pressed_inputs.back())
+	if !pressed_inputs.is_empty() and !moving:
+		var no_opposing_directions = _input_direction_canceling(pressed_inputs.back())
+		if no_opposing_directions:
+			moving = true
+			var anim_str = "walk_" + pressed_inputs.back()
+			anim_player.play(anim_str)
+			move(pressed_inputs.back())

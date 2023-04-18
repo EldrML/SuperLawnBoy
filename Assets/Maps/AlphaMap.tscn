@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://nnmvj5mx675v"]
+[gd_scene load_steps=5 format=3 uid="uid://1y80c4j2qym2"]
 
 [ext_resource type="Texture2D" uid="uid://c0s6t2yv8om6t" path="res://Assets/Sprites/sheets/lawn_A5.png" id="1_vuh5a"]
-[ext_resource type="Script" path="res://Assets/Scenes/LawnBoy.gd" id="2_7elml"]
-[ext_resource type="Texture2D" uid="uid://cw0pjqi4gmknp" path="res://Assets/Sprites/sheets/lawnboy_move_nomowers.png" id="2_yharm"]
+[ext_resource type="PackedScene" uid="uid://fw6h2kami5qi" path="res://Assets/Characters/_LawnBoy/lawn_boy.tscn" id="2_bx265"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p66le"]
 texture = ExtResource("1_vuh5a")
@@ -22,169 +21,6 @@ texture = ExtResource("1_vuh5a")
 [sub_resource type="TileSet" id="TileSet_pbdxa"]
 sources/0 = SubResource("TileSetAtlasSource_p66le")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6nhfe"]
-size = Vector2(16, 16)
-
-[sub_resource type="Animation" id="Animation_m3d42"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LawnboyMoveNomowers:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [8]
-}
-
-[sub_resource type="Animation" id="Animation_kjg4t"]
-resource_name = "face_down"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LawnboyMoveNomowers:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-
-[sub_resource type="Animation" id="Animation_lcc08"]
-resource_name = "face_right"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LawnboyMoveNomowers:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [7]
-}
-
-[sub_resource type="Animation" id="Animation_psqm3"]
-resource_name = "face left"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LawnboyMoveNomowers:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-
-[sub_resource type="Animation" id="Animation_i4eb5"]
-resource_name = "face_up"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LawnboyMoveNomowers:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [10]
-}
-
-[sub_resource type="Animation" id="Animation_f5f80"]
-resource_name = "walk_right"
-length = 0.6
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LawnboyMoveNomowers:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [6, 7, 8, 7]
-}
-
-[sub_resource type="Animation" id="Animation_5fug3"]
-resource_name = "walk_up"
-length = 0.6
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LawnboyMoveNomowers:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [9, 10, 11, 10]
-}
-
-[sub_resource type="Animation" id="Animation_cy2d7"]
-resource_name = "walk_left"
-length = 0.6
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LawnboyMoveNomowers:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [3, 4, 5, 4]
-}
-
-[sub_resource type="Animation" id="Animation_rhoj8"]
-resource_name = "walk_down"
-length = 0.6
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LawnboyMoveNomowers:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 1]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_yf1ge"]
-_data = {
-"RESET": SubResource("Animation_m3d42"),
-"face left": SubResource("Animation_psqm3"),
-"face_down": SubResource("Animation_kjg4t"),
-"face_right": SubResource("Animation_lcc08"),
-"face_up": SubResource("Animation_i4eb5"),
-"walk_down": SubResource("Animation_rhoj8"),
-"walk_left": SubResource("Animation_cy2d7"),
-"walk_right": SubResource("Animation_f5f80"),
-"walk_up": SubResource("Animation_5fug3")
-}
-
 [node name="TestMap" type="Node2D"]
 
 [node name="GrassBase" type="TileMap" parent="."]
@@ -199,23 +35,5 @@ tile_set = SubResource("TileSet_pbdxa")
 format = 2
 layer_0/tile_data = PackedInt32Array(0, 0, 1, 1, 65536, 1, 2, 65536, 1, 3, 65536, 1, 4, 65536, 1, 5, 65536, 1, 6, 65536, 1, 7, 65536, 1, 8, 65536, 1, 9, 65536, 1, 10, 65536, 1, 11, 65536, 1, 12, 65536, 1, 13, 65536, 1, 14, 131072, 1, 65536, 0, 2, 65550, 131072, 2, 131072, 0, 2, 131086, 131072, 2, 196608, 0, 2, 196615, 458752, 2, 196616, 458752, 3, 196617, 458752, 3, 196618, 458752, 3, 196619, 458752, 3, 196620, 458752, 3, 196621, 458752, 2, 196622, 131072, 2, 262144, 0, 2, 262151, 458752, 3, 262152, 393216, 4, 262153, 393216, 4, 262154, 393216, 4, 262155, 393216, 4, 262156, 393216, 4, 262157, 458752, 3, 262158, 131072, 2, 327680, 0, 2, 327688, 393216, 4, 327689, 393216, 4, 327690, 393216, 4, 327691, 393216, 4, 327692, 393216, 4, 327694, 131072, 2, 393216, 0, 2, 393224, 393216, 4, 393225, 393216, 4, 393226, 393216, 4, 393227, 393216, 4, 393228, 393216, 4, 393230, 131072, 2, 458752, 0, 2, 458760, 393216, 4, 458761, 393216, 4, 458762, 393216, 4, 458763, 393216, 4, 458764, 393216, 4, 458766, 131072, 2, 524288, 0, 2, 524296, 393216, 4, 524297, 393216, 4, 524298, 393216, 4, 524299, 393216, 4, 524300, 393216, 4, 524302, 131072, 2, 589824, 0, 2, 589832, 393216, 4, 589833, 393216, 4, 589834, 393216, 4, 589835, 393216, 4, 589836, 393216, 4, 589838, 131072, 2, 655360, 0, 2, 655368, 393216, 4, 655369, 393216, 4, 655370, 393216, 4, 655371, 393216, 4, 655372, 393216, 4, 655374, 131072, 2, 720896, 0, 2, 720910, 131072, 2, 786432, 0, 2, 786446, 131072, 2, 851968, 0, 2, 851982, 131072, 2, 917504, 0, 3, 917505, 65536, 3, 917506, 65536, 3, 917507, 65536, 3, 917508, 65536, 3, 917509, 65536, 3, 917510, 65536, 3, 917511, 65536, 3, 917512, 65536, 3, 917513, 65536, 3, 917514, 65536, 3, 917515, 65536, 3, 917516, 65536, 3, 917517, 65536, 3, 917518, 131072, 3)
 
-[node name="LawnBoy" type="Area2D" parent="."]
-position = Vector2(56, 88)
-script = ExtResource("2_7elml")
-
-[node name="LawnboyMoveNomowers" type="Sprite2D" parent="LawnBoy"]
-texture_filter = 1
-texture = ExtResource("2_yharm")
-hframes = 3
-vframes = 4
-frame = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LawnBoy"]
-shape = SubResource("RectangleShape2D_6nhfe")
-
-[node name="Lawnboy_AnimationPlayer" type="AnimationPlayer" parent="LawnBoy"]
-libraries = {
-"": SubResource("AnimationLibrary_yf1ge")
-}
-
-[node name="RayCast2D" type="RayCast2D" parent="LawnBoy"]
+[node name="LawnBoy" parent="." instance=ExtResource("2_bx265")]
+position = Vector2(56, 104)

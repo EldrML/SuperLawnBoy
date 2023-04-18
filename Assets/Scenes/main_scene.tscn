@@ -1,10 +1,9 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://b6y3is4nv7uy6"]
 
-[ext_resource type="PackedScene" path="res://Assets/Scenes/TestMap.tscn" id="1_dleqg"]
+[ext_resource type="PackedScene" uid="uid://1y80c4j2qym2" path="res://Assets/Maps/AlphaMap.tscn" id="1_x3qtj"]
 
 [node name="main_scene" type="Node2D"]
 
-[node name="LawnboyMoveNomower" type="Sprite2D" parent="."]
-position = Vector2(-995, 901)
-
-[node name="TestMap" parent="." instance=ExtResource("1_dleqg")]
+[node name="TestMap" parent="." instance=ExtResource("1_x3qtj")]
+z_index = -1
+position = Vector2(1, 0)
